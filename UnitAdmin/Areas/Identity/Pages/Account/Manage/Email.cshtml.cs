@@ -5,14 +5,14 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Linq;
 using System.Threading.Tasks;
-using Lab.UI.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using UnitAdmin.Models;
 
-namespace Lab.UI.Areas.Identity.Pages.Account.Manage
+namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
 {
     public partial class EmailModel : PageModel
     {
