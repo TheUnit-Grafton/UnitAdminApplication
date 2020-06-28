@@ -1,0 +1,8 @@
+﻿@page "/parts/add"
+@inject IPartsService parts
+@inject NavigationManager navMan
+
+<h2 class="lab-header">Add to Parts Inventory</h2> 
+
+<PartForm model="@model" buttonText="Add Part" OnValidSubmit="@SavePart" OnCancelClick="@CancelClicked"/>
+

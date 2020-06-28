@@ -1,0 +1,11 @@
+﻿@page "/computers/{id:int}"
+@inject IComputerService _context
+@inject NavigationManager navMan
+
+<h3 class="lab-header">Edit Computer</h3>
+
+<div>
+    <ComputerForm model="@model" buttonText="Update" OnValidSubmit="@UpdateComputer" OnCancelClick="@CancelClicked" />
+    @*<button class="btn btn-danger m3" @onclick="DeleteComputer">Delete</button>*@
+
+</div>

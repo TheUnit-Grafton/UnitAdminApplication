@@ -1,0 +1,42 @@
+﻿@page "/parts"
+
+
+<h1 class="lab-header">List of Parts in stock</h1>
+<p>Double-Click on a row to Edit that part's record.</p>
+
+<SfGrid DataSource="@parts" AllowPaging="true" AllowSorting="true" Height="550">
+    <GridPageSettings PageSize="15"></GridPageSettings>
+    <GridEvents OnRecordDoubleClick="EditAsset" TValue="PartModel"></GridEvents>
+    <GridColumns>
+        <GridColumn Field=@nameof(PartModel.Id)
+                    HeaderText="ID"
+                    TextAlign="TextAlign.Left"
+                    Width="85">
+        </GridColumn>
+        <GridColumn Field=@nameof(PartModel.Type)
+                    HeaderText="Type"
+                    TextAlign="TextAlign.Center"
+                    Width="150">
+        </GridColumn>
+
+        <GridColumn Field=@nameof(PartModel.Description)
+                    HeaderText="Description"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(PartModel.Brand)
+                    HeaderText="Brand"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(PartModel.Capacity)
+                    HeaderText="Capacity"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+    </GridColumns>
+</SfGrid>
+<div class="m-3">
+    <button class="btn btn-primary" @onclick="AddPart">New Part</button>
+</div>
+
+@code{
+
+}

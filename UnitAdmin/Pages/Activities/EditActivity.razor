@@ -1,0 +1,16 @@
+﻿@page "/Activity/{id:int}"
+@inject IActivityService whatsOn
+@inject NavigationManager navMan
+
+<h1>Edit Activity</h1>
+
+<ActivityForm buttonText="Update" OnValidSubmit="@SaveActivity" 
+              OnCancelClick="@CancelClicked" activity="@activity" />
+
+
+@code{ 
+    [Parameter] public int id { get; set; }
+}
+
+
+

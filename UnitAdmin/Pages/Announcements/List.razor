@@ -1,0 +1,36 @@
+﻿@page "/announcements"
+@page "/announcements/list"
+@inject IAnnouncementService notices
+@inject NavigationManager navMan
+
+<h3 class="lab-header-italic">Announcement List</h3>
+<div>
+    <SfCheckBox Label="Display non-current activities" Checked="@displayNonCurrent" @onchange="ToggleNonCurrentDisplay"></SfCheckBox>
+    <SfGrid DataSource="@_announcements" AllowPaging="true" AllowSorting="true" Height="550">
+        <GridPageSettings PageSize="15"></GridPageSettings>
+        <GridEvents OnRecordDoubleClick="EditAnnouncement" TValue="AnnouncementModel"></GridEvents>
+        <GridColumns>
+            <GridColumn Field=@nameof(AnnouncementModel.Id)
+                        HeaderText="ID"
+                        TextAlign="TextAlign.Left"
+                        Width="30">
+            </GridColumn>
+            <GridColumn Field=@nameof(AnnouncementModel.Message)
+                        HeaderText="Message"
+                        TextAlign="TextAlign.Left"
+                        Width="350">
+            </GridColumn>
+            <GridColumn Field=@nameof(AnnouncementModel.LinkAddress)
+                        HeaderText="Link"
+                        TextAlign="TextAlign.Left"
+                        Width="100">
+            </GridColumn>
+            <GridColumn Field=@nameof(AnnouncementModel.IsCurrent)
+                        HeaderText="Is Current?"
+                        TextAlign="TextAlign.Center"
+                        Width="75">
+            </GridColumn>
+        </GridColumns>
+    </SfGrid>
+    <button class="btn btn-primary" @onclick="AddAnnouncement">New Announcement</button>
+</div>

@@ -1,0 +1,10 @@
+﻿@page "/Activity/Add"
+@inject IActivityService whatsOn
+@inject NavigationManager navMan
+
+<h3>Add Activity</h3>
+
+<ActivityForm buttonText="Add Activity" activity="@activity" OnValidSubmit="@CreateActivity" OnCancelClick="@CancelClicked"/>
+
+
+

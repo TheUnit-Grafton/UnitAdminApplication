@@ -1,0 +1,112 @@
+﻿<EditForm Model="@model" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label class="control-label">Asset ID Tag:</label>
+        <InputText class="form-control" @bind-Value="@model.AssetTag" placeholder="Asset Tag" />
+        <ValidationMessage For="@(() => model.AssetTag)" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Computer Brand:</label>
+        <InputText class="form-control" @bind-Value="@model.Brand" placeholder="Brand" />
+        <ValidationMessage For="@(() => model.Brand)" />
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label">Serial Number:</label>
+        <InputTextArea class="form-control" @bind-Value="@model.SerialNumber" placeholder="Serial Number" />
+        <ValidationMessage For="@(() => model.SerialNumber)" />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Computer Source:</label>
+        <InputText class="form-control" @bind-Value="@model.ObtainedFrom" placeholder ="Obtained from"/>
+        <ValidationMessage For="@(() => model.ObtainedFrom)" />
+    </div>
+   
+    <div class="form-group">
+        <label class="control-label">Form Factor:</label>
+        <select class="form-control" @bind="@model.FormFactor">
+            @foreach (Enums.FormFactor t in Enum.GetValues(typeof(Enums.FormFactor)))
+            {
+                <option>@t</option>
+            }
+        </select>
+        <ValidationMessage For="@(() => model.FormFactor)" />
+    </div>
+
+    <div class="row">
+        <div class="form-group m-2">
+            <label class="control-label">Processor: </label>
+            <InputText class="form-control" @bind-Value="@model.CPU" placeholder="CPU Type" />
+            <ValidationMessage For="@(() => model.CPU)" />
+        </div>
+        <div class="form-group m-2">
+            <label class="control-label">Processor Speed: </label>
+            <InputText class="form-control" @bind-Value="@model.Speed" placeholder="CPU Speed" />
+            <ValidationMessage For="@(() => model.Speed)" />
+        </div>
+        <div class="form-group m-2">
+            <label class="control-label">Memory Type : </label>
+            <InputText class="form-control" @bind-Value="@model.MemoryType" placeholder="Memory Type" />
+            <ValidationMessage For="@(() => model.MemoryType)" />
+        </div>
+        <div class="form-group m-2">
+            <label class="control-label">Memory Size: </label>
+            <InputText class="form-control" @bind-Value="@model.MemorySizeInGb" placeholder="Total RAM" />
+            <ValidationMessage For="@(() => model.MemorySizeInGb)" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group m-2">
+            <label class="control-label">Hard Drive Brand: </label>
+            <InputText class="form-control" @bind-Value="@model.HardDriveBrand" placeholder="HDD Brand" />
+            <ValidationMessage For="@(() => model.HardDriveBrand)" />
+        </div>
+        <div class="form-group  m-2">
+            <label class="control-label">Hard Drive Capacity (Gb) : </label>
+            <InputText class="form-control" @bind-Value="@model.HardDriveSizeInGb" placeholder="HDD Capacity" />
+            <ValidationMessage For="@(() => model.HardDriveSizeInGb)" />
+        </div>
+        <div class="form-group m-2">
+            <label class="control-label">Hard Drive Type: </label>
+            <select class="form-control" id="driveType" @bind="@model.DriveType">
+                @foreach (Enums.DriveType t in Enum.GetValues(typeof(Enums.DriveType)))
+                {
+                    <option>@t</option>
+                }
+            </select>
+            <ValidationMessage For="@(() => model.DriveType)" />
+        </div>
+        <div class="form-group m-2">
+            <label class="control-label">Operating System:</label>
+            <InputText class="form-control" @bind-Value="@model.OperatingSystem" placeholder="Operating System and Version" />
+            <ValidationMessage For="@(() => model.OperatingSystem)" />
+        </div>
+        <div class="form-group m-8">
+            <SfCheckBox Label="Current Asset?" Checked="@model.IsCurrentAsset" ></SfCheckBox>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group m-2">
+            <label class="control-label">General Comments:</label>
+            <InputTextArea class="form-control" @bind-Value="@model.Comments" placeholder="Comments / Notes..." width="" />
+            <ValidationMessage For="@(() => model.Comments)" />
+        </div>
+       
+    </div>
+
+    <button type="submit" class="btn btn-success m-3">@buttonText</button>
+    <button @onclick="OnCancelClick" class="btn btn-danger m-3">Cancel</button>
+
+</EditForm>
+
+@code {
+    [Parameter] public ComputerModel model { get; set; }
+    [Parameter] public string buttonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+    [Parameter] public EventCallback OnCancelClick { get; set; }
+
+}

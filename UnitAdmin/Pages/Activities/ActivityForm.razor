@@ -1,0 +1,67 @@
+﻿    <EditForm Model="@activity" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+
+        <label class="control-label">Activity Name:</label>
+        <div>
+            <InputTextArea class="form-control" id="name" @bind-Value="@activity.ActivityName" />
+            <ValidationMessage For="@(() => activity.ActivityName)" />
+        </div>
+    </div>
+    <div class="form-group">
+
+        <label class="control-label">Activity Description:</label>
+        <div>
+            <InputTextArea class="form-control" id="description" @bind-Value="@activity.ActivityDescription" />
+            <ValidationMessage For="@(() => activity.ActivityDescription)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Activity Type:</label>
+        <div>
+            <select class="form-control" id="type" @bind="@activity.ActivityType">
+                @foreach (Enums.ActivityType t in Enum.GetValues(typeof(Enums.ActivityType)))
+                {
+                    <option>@t</option>
+                }
+            </select>
+            <ValidationMessage For="(() => activity.ActivityType)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Activity Location:</label>
+        <div>
+            <InputTextArea class="form-control" id="location" @bind-Value="@activity.ActivityAddress" />
+            <ValidationMessage For="(() => activity.ActivityAddress)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Activity Port:</label>
+        <div>
+            <InputTextArea class="form-control" id="port" @bind-Value="@activity.ActivityPort" />
+            <ValidationMessage For="(() => activity.ActivityPort)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Activity is current:</label>
+        <div>
+            <InputCheckbox id="current" @bind-Value="@activity.IsCurrent" />
+            <ValidationMessage For="(() => activity.IsCurrent)" />
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-success m-3">@buttonText</button>
+    <button @onclick="OnCancelClick" class="btn btn-danger m-3">Cancel</button>
+    @*<button @onclick="ClickDelete" class="btn btn-danger m-3">Delete Record</button>*@
+
+</EditForm>
+
+@code{
+    [Parameter] public ActivityModel activity { get; set; }
+    [Parameter] public string buttonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+    [Parameter] public EventCallback OnCancelClick { get; set; }
+    //[Parameter] public EventCallback ClickDelete { get; set; }
+}

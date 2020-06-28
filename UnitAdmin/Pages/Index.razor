@@ -1,0 +1,96 @@
+﻿@page "/"
+@inject IActivityService whatsOn;
+@inject IAnnouncementService notices;
+@inject NavigationManager navMan;
+
+<h1 class="lab-header-italic">Today's Activities at The UnIT - <DateComponent /></h1>
+
+@if (_activities is null) // If no activities have been loaded
+{
+    <p>Loading data...</p>
+}
+else
+{
+    @if (_announcements.Count > 0)
+    {
+        foreach (var announcement in _announcements)
+        {
+            if (announcement.IsCurrent)
+            {
+                <div>
+                    <Announcement Message="@announcement.Message" LinkAddress="@announcement.LinkAddress" />
+                </div>
+            }
+        }
+    }
+
+    <div>
+        <div class="col-6">
+            <h4 style="color:red;">Here is what you can do at The UnIT today:</h4>
+        </div>
+    </div>
+    <br />
+
+    <div>
+        <AuthorizeView>
+            <Authorized>
+                <SfCheckBox Label="Display non-current activities" Checked="@DisplayNonCurrent" @onchange="ToggleCurrentActivities"></SfCheckBox>
+            </Authorized>
+        </AuthorizeView>
+
+        @if (_activities.Count < 1)
+        {
+            <p />
+            <h3 class="text-danger">There are no activities registered for today</h3>
+        }
+        else
+        {
+            <table class="table-bordered ">
+                <thead class="">
+                    <tr class="">
+                        <td class="p-2"><h4 class="font-weight-bold">Activity</h4></td>
+                        <td class="p-2"><h4 class="font-weight-bold">Type</h4></td>
+                        <td class="p-2"><h4 class="font-weight-bold">Location</h4></td>
+                        <td class="p-2"><h4 class="font-weight-bold">Port</h4></td>
+                        <AuthorizeView>
+                            <Authorized>
+
+                                <td></td>
+                            </Authorized>
+                        </AuthorizeView>
+                    </tr>
+                </thead>
+                <tbody class="m-2 p-2">
+
+                    @foreach (var activity in _activities)
+                    {
+                        <tr class="">
+                            <td class="p-2">
+                                <h4 class="font-weight-bold lab-colour">@activity.ActivityName</h4>
+                                <p class="font-italic">@activity.ActivityDescription</p>
+                            </td>
+                            <td class="p-2">@activity.ActivityType</td>
+                            <td class="p-2">@activity.ActivityAddress</td>
+                            <td class="p-2">@activity.ActivityPort</td>
+
+                            <AuthorizeView>
+                                <Authorized>
+                                    <td class="p-2">
+                                        <a class="btn btn-info p-2" href="/Activity/@activity.Id">Edit</a>
+                                    </td>
+                                </Authorized>
+                            </AuthorizeView>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        <AuthorizeView>
+            <Authorized>
+                <div class="m-3">
+                    <button class="btn btn-primary m-2" @onclick="AddActivity">Add Activity</button>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+    </div>
+}

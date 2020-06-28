@@ -1,0 +1,26 @@
+﻿@page "/announcements/add"
+@page "/announcements/{Id:int}"
+
+@inject IAnnouncementService announcements
+@inject NavigationManager navMan
+
+<h3 class="lab-header">Add Announcement</h3>
+<br />
+<EditForm Model="@model" OnValidSubmit="SaveAnnouncement">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label class="control-label">Announcement:</label>
+        <InputText @bind-Value="model.Message" class="form-control" />
+        <ValidationMessage For="@(() => model.Message)" class="text-danger" />
+    </div>
+    <div class="form-group">
+        <label class="control-label">Information / File URL:</label>
+        <InputText @bind-Value="model.LinkAddress" class="form-control" />
+    </div>
+    <div class="form-group">
+        <SfCheckBox Label="Announcement Current?" @bind-Checked="@model.IsCurrent" LabelPosition="LabelPosition.Before"></SfCheckBox>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save Announcement" class="btn btn-primary" />
+    </div>
+</EditForm>

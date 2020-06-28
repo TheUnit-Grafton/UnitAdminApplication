@@ -1,0 +1,11 @@
+﻿@page "/parts/{id:int}"
+@inject IPartsService parts
+@inject NavigationManager navMan
+  
+<h3>Edit Part</h3>
+
+<PartForm model="@partToEdit" buttonText="Update Record" OnValidSubmit="@UpdateRecord" OnCancelClick="@CancelUpdate" />
+
+@code {
+    [Parameter] public int id { get; set; }
+}

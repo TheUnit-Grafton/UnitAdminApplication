@@ -1,0 +1,16 @@
+﻿<div class="alert alert-danger text-body">
+    <h4>NOTE:</h4>
+
+    @Message. @if (string.IsNullOrWhiteSpace(@LinkAddress) == false)
+    {
+        <span> For additional information, or to download the file please<a href="@LinkAddress"> Click Here!</a ></span>
+    }
+
+</div>
+@code{
+    [Parameter]
+    public string Message { get; set; }
+
+    [Parameter]
+    public string LinkAddress { get; set; }
+}

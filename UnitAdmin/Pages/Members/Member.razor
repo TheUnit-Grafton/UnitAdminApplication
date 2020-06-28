@@ -1,0 +1,16 @@
+﻿@page "/member"
+@inject NavigationManager navMan
+ 
+<h3>Member</h3>
+
+<MemberForm model="@newMember" OnValidSubmit="SaveMember" />
+
+@code {
+    private MemberModel newMember = new MemberModel();
+
+    public void SaveMember()
+    {
+
+    }
+
+}

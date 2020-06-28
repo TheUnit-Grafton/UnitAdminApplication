@@ -1,0 +1,50 @@
+﻿@page "/computers"
+@inject IComputerService _computers
+@inject NavigationManager navMan
+
+<h1 class="lab-header">List of The UnIT's Computers</h1>
+<p>Double-Click on a row to Edit that computer's record.</p>
+
+<SfGrid DataSource="@computers" AllowPaging="true" AllowSorting="true" Height="550">
+    <GridPageSettings PageSize="15"></GridPageSettings>
+    <GridEvents OnRecordDoubleClick="EditAsset" TValue="ComputerModel"></GridEvents>
+    <GridColumns>
+        <GridColumn Field=@nameof(ComputerModel.Id)
+                    HeaderText="ID"
+                    TextAlign="TextAlign.Center"
+                    Width="75">
+        </GridColumn>
+
+        <GridColumn Field=@nameof(ComputerModel.AssetTag)
+                    HeaderText="Asset ID"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(ComputerModel.Brand)
+                    HeaderText="Brand"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(ComputerModel.FormFactor)
+                    HeaderText="Form Factor"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(ComputerModel.CPU)
+                    HeaderText="CPU"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(ComputerModel.MemorySizeInGb)
+                    HeaderText="RAM (Gb)"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(ComputerModel.HardDriveSizeInGb)
+                    HeaderText="HDD Capacity (Gb)"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(ComputerModel.Comments)
+                    HeaderText="Comments"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+    </GridColumns>
+</SfGrid>
+<div class="m-3">
+    <button class="btn btn-primary" @onclick="AddComputer">Add Computer</button>
+</div>
