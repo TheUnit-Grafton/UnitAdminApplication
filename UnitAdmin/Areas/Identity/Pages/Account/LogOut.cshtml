@@ -1,15 +1,42 @@
-﻿@page
-@using Microsoft.AspNetCore.Identity
+﻿@page "/logout"
+@using  Microsoft.AspNetCore.Identity
 @attribute [IgnoreAntiforgeryToken]
-@inject SignInManager<IdentityUser> SignInManager
-@functions {
+@inject SignInManager<AppUser> _signInManager
+
+@functions{
+
     public async Task<IActionResult> OnPost()
     {
-        if (SignInManager.IsSignedIn(User))
+        if (_signInManager.IsSignedIn(User))
         {
-            await SignInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
+
+            <p>You have been signed out.</p>
+            <p>You will be automatically redirected to the Home page in 5 seconds</p>
+            await Task.Delay(5000);
+
         }
 
-        return Redirect("~/");
+
+
+        return  Redirect("/");
     }
 }
+
+
+
+
+@*
+    Original page content
+
+    @page "/Account/Logout"
+@model LogoutModel
+@{
+    ViewData["Title"] = "Log out";
+}
+
+<header>
+    <h1>@ViewData["Title"]</h1>
+    <p>You have successfully logged out of the application.</p>
+    >
+</header>*@
