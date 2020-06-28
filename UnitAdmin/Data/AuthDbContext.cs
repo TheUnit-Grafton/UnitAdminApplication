@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using UnitAdmin.Models;
 
 namespace UnitAdmin.Data
 {
@@ -12,5 +13,8 @@ namespace UnitAdmin.Data
             : base(options)
         {
         }
+
+        public DbSet<AppUser> appUsers { get; set; }
+        public DbSet<AppRole> appRoles { get; set; }
     }
 }

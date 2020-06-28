@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,7 +50,9 @@ namespace UnitAdmin
              {
                  options.SignIn.RequireConfirmedAccount = false;
                  options.User.RequireUniqueEmail = true;
+                 
                  options.SignIn.RequireConfirmedEmail = false;
+                 
              })
                 .AddUserManager<UserManager<AppUser>>()
                 .AddRoles<AppRole>()
@@ -63,6 +66,10 @@ namespace UnitAdmin
             services.AddSyncfusionBlazor();
 
             services.AddScoped<AuthenticationStateProvider , RevalidatingIdentityAuthenticationStateProvider<AppUser>>();
+
+            // Add fake Email sender for Identity
+            // TODO: Replace mock email sender with real implementation
+            services.AddSingleton<IEmailSender , MockEmailSender>();
 
             services.AddScoped<IActivityService , ActivityService>();
             services.AddScoped<IAnnouncementService , AnnouncementService>();
