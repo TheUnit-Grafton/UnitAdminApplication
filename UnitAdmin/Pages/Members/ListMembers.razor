@@ -1,0 +1,74 @@
+﻿@page "/members"
+@inject IMemberService _context
+@inject NavigationManager navMan  
+
+<h3>The UnIT Clarence Valley Members</h3>
+<div>
+    <p>Double-click on a row to edit member.</p>
+    <AuthorizeView>
+        <Authorized>
+            <SfCheckBox Label="Display non-current members" Checked="@DisplayNonCurrent" @onchange="ToggleCurrentMembers"></SfCheckBox>
+        </Authorized>
+    </AuthorizeView>
+
+    <SfGrid DataSource="@members" AllowPaging="true" AllowSorting="true" Height="550">
+        <GridPageSettings PageSize="15"></GridPageSettings>
+        <GridEvents OnRecordDoubleClick="EditMember" TValue="MemberModel"></GridEvents>
+        <GridColumns>
+            <GridColumn Field=@nameof(MemberModel.PhotoPath)
+                        HeaderText="ID"
+                        TextAlign="TextAlign.Center"
+                        Width="75">
+                <Template>
+                    @{
+                        var member = (context as MemberModel);
+                        <div class="image">
+                            <img src="@($"~/Images/{member.PhotoPath}")" alt="@member.Id" />
+                        </div>
+                    }
+                </Template>
+            </GridColumn>
+
+            <GridColumn Field=@nameof(MemberModel.LastName)
+                        HeaderText="Last Name"
+                        TextAlign="TextAlign.Left"
+                        Width="150">
+            </GridColumn>
+            <GridColumn Field=@nameof(MemberModel.FirstName)
+                        HeaderText="First Name"
+                        TextAlign="TextAlign.Left"
+                        Width="150">
+            </GridColumn>
+            <GridColumn Field=@nameof(MemberModel.DateOfBirth)
+                        HeaderText="Date of Birth"
+                        TextAlign="TextAlign.Left"
+                        Width="150"
+                        Format="d"
+                        Type="ColumnType.Date">
+            </GridColumn>
+            <GridColumn Field=@nameof(MemberModel.AgeInYears)
+                        HeaderText="Age"
+                        TextAlign="TextAlign.Left"
+                        Width="150">
+            </GridColumn>
+            <GridColumn Field=@nameof(MemberModel.BookedSession)
+                        HeaderText="Booked Session"
+                        TextAlign="TextAlign.Left"
+                        Width="150">
+            </GridColumn>
+            <GridColumn Field=@nameof(MemberModel.IsCadet)
+                        HeaderText="Cadet"
+                        TextAlign="TextAlign.Left"
+                        Width="75"
+                        Type="ColumnType.Boolean">
+            </GridColumn>
+
+
+        </GridColumns>
+    </SfGrid>
+    <div class="m-3">
+        <button class="btn btn-primary" @onclick="AddMember">Add New Member</button>
+    </div>
+    
+</div>
+

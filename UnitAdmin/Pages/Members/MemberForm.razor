@@ -1,4 +1,4 @@
-﻿<EditForm Model="@model" OnInvalidSubmit="@OnValidSubmit">
+﻿<EditForm Model="@model" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <div class="container">
         <div class="row">
@@ -55,13 +55,28 @@
             </div>
 
             <div class="col-6 float-right">
-                @*
-                    TODO: Replace display element with upload control
-                *@
-                @*<img src=@fullPhotoPath height="250" width="250" asp-append-version="true" />*@
+                @* Column for photo of Members*@
+
+                @if (string.IsNullOrWhiteSpace(model.PhotoPath)) // No photo file name on record
+                {
+                    <SfUploader AllowedExtensions=".jpg, .png, .gif"
+                                Multiple="false"
+                                AutoUpload="true">
+                        <UploaderEvents ValueChange="UploadPhoto"></UploaderEvents>
+                    </SfUploader>
+                }
+                else
+                {
+                    <img src="@model.PhotoPath" />
+                }
             </div>
         </div>
     </div>
+
+    <button type="submit" class="btn btn-success m-3">@buttonText</button>
+    <button @onclick="OnCancelClick" class="btn btn-warning m-3">
+        Cancel
+    </button>
 </EditForm>
 
 @code {
@@ -69,5 +84,6 @@
     [Parameter] public string buttonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
     [Parameter] public EventCallback OnCancelClick { get; set; }
+
 
 }
