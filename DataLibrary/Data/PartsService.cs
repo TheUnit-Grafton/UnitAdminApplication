@@ -18,19 +18,16 @@ namespace DataLibrary.Data
 
         public void SavePart(PartModel part)
         {
-            if (part != null)
-            {
-                if (part.Id == 0) //Id = 0 then this is a new part, otherwise it's existing
-                {
-                    _db.Parts.Add(part);
-                }
-                else
-                {
-                    _db.Parts.Attach(part);
-                    _db.Entry(part).State = EntityState.Modified;
-                }
-                _db.SaveChanges();
-            }
+            _db.Parts.Add(part);
+            _db.SaveChanges();
+        }
+
+        public async Task<PartModel> UpdatePart(PartModel part)
+        {
+            _db.Parts.Attach(part);
+            _db.Entry(part).State = EntityState.Modified;
+            await _db.SaveChangesAsync();
+            return part;
         }
 
         public IEnumerable<PartModel> GetPartsInStock()
