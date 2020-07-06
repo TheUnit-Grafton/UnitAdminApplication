@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Assets
 {
-    public partial class EditComputer
+    public partial class EditComputer : ComponentBase
     {
 
         [Parameter]

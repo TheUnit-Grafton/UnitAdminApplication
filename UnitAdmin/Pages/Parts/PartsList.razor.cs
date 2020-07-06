@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace UnitAdmin.Pages.Parts
 {
-    public partial class PartsList
+    public partial class PartsList : ComponentBase
     {
         [Inject]
         private IPartsService _Parts { get; set; }
