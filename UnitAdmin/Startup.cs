@@ -68,6 +68,7 @@ namespace UnitAdmin
             services.AddScoped<IAnnouncementService , AnnouncementService>();
             services.AddScoped<IComputerService , ComputerService>();
             services.AddScoped<IPartsService , PartsService>();
+            services.AddScoped<IMemberService , MemberService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,17 @@
+﻿@page "/members/{id:int}"
+@inject IMemberService _context
+@inject NavigationManager navMan
+
+<h3 class="lab-header-italic">Edit Member</h3>
+
+<MemberForm model="@member" buttonText="Update Member" OnValidSubmit="@UpdateRecord" OnCancelClick="@CancelUpdate" />
+@*<div>
+    <button @onclick="DeleteMember" class="btn btn-danger m-3">
+        Delete Member
+    </button>
+</div>*@
+
+
+@code {
+    [Parameter] public int id { get; set; }
+}

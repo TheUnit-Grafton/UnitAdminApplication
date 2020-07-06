@@ -1,0 +1,7 @@
+﻿@page "/members/add"
+@inject IMemberService _context
+@inject NavigationManager navMan
+ 
+<h3 class="lab-header-italic">New Member</h3>
+
+<MemberForm model="@newMember" OnValidSubmit="SaveMember" buttonText="Add Member" OnCancelClick="@CancelClicked" />
