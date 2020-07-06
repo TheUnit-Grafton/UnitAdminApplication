@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Assets
 {
-    public partial class AddComputer
+    public partial class AddComputer : ComponentBase
     {
         private ComputerModel model = new ComputerModel();
 

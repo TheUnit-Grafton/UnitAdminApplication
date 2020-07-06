@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Announcements
 {
-    public partial class AddAnnouncement
+    public partial class AddAnnouncement : ComponentBase
     {
         private AnnouncementModel model = new AnnouncementModel();
 

@@ -1,4 +1,5 @@
 ﻿using DataLibrary.Models;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Parts
 {
-    public partial class EditPart
+    public partial class EditPart : ComponentBase
     {
         private PartModel partToEdit;
 

@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-UnitAdmin-C3F59A95-FD39-43F9-AA2F-9E1EA9E4856B</UserSecretsId>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Version>0.2.0</Version>
+    <Copyright>Steve Teece 2020</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

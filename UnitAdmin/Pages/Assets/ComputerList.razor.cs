@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace UnitAdmin.Pages.Assets
 {
-    public partial class ComputerList
+    public partial class ComputerList : ComponentBase
     {
         private List<ComputerModel> computers { get; set; }
 
