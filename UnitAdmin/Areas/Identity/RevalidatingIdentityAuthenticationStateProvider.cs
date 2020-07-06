@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,8 +19,8 @@ namespace UnitAdmin.Areas.Identity
         private readonly IdentityOptions _options;
 
         public RevalidatingIdentityAuthenticationStateProvider(
-            ILoggerFactory loggerFactory ,
-            IServiceScopeFactory scopeFactory ,
+            ILoggerFactory loggerFactory,
+            IServiceScopeFactory scopeFactory,
             IOptions<IdentityOptions> optionsAccessor)
             : base(loggerFactory)
         {
@@ -31,14 +31,14 @@ namespace UnitAdmin.Areas.Identity
         protected override TimeSpan RevalidationInterval => TimeSpan.FromMinutes(30);
 
         protected override async Task<bool> ValidateAuthenticationStateAsync(
-            AuthenticationState authenticationState , CancellationToken cancellationToken)
+            AuthenticationState authenticationState, CancellationToken cancellationToken)
         {
             // Get the user manager from a new scope to ensure it fetches fresh data
             var scope = _scopeFactory.CreateScope();
             try
             {
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TUser>>();
-                return await ValidateSecurityStampAsync(userManager , authenticationState.User);
+                return await ValidateSecurityStampAsync(userManager, authenticationState.User);
             }
             finally
             {
@@ -53,7 +53,7 @@ namespace UnitAdmin.Areas.Identity
             }
         }
 
-        private async Task<bool> ValidateSecurityStampAsync(UserManager<TUser> userManager , ClaimsPrincipal principal)
+        private async Task<bool> ValidateSecurityStampAsync(UserManager<TUser> userManager, ClaimsPrincipal principal)
         {
             var user = await userManager.GetUserAsync(principal);
             if (user == null)

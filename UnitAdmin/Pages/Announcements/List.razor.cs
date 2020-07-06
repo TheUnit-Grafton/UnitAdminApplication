@@ -1,4 +1,5 @@
 ﻿using DataLibrary.Models;
+using Microsoft.AspNetCore.Components;
 using Syncfusion.Blazor.Grids;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Announcements
 {
-    public partial class List
+    public partial class List : ComponentBase
     {
         private List<AnnouncementModel> _announcements;
         private bool displayNonCurrent = false;

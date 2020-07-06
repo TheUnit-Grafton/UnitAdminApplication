@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,13 +51,17 @@ namespace UnitAdmin
              {
                  options.SignIn.RequireConfirmedAccount = false;
                  options.User.RequireUniqueEmail = true;
+                 
                  options.SignIn.RequireConfirmedEmail = false;
+                 
              })
                 .AddUserManager<UserManager<AppUser>>()
                 .AddRoles<AppRole>()
                 .AddEntityFrameworkStores<AuthDbContext>();
 
-            services.AddMvc();
+            // Required for the SyncFusion File Upload control to function
+            services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
@@ -63,6 +69,10 @@ namespace UnitAdmin
             services.AddSyncfusionBlazor();
 
             services.AddScoped<AuthenticationStateProvider , RevalidatingIdentityAuthenticationStateProvider<AppUser>>();
+
+            // Add fake Email sender for Identity
+            // TODO: Replace mock email sender with real implementation
+            services.AddSingleton<IEmailSender , MockEmailSender>();
 
             services.AddScoped<IActivityService , ActivityService>();
             services.AddScoped<IAnnouncementService , AnnouncementService>();
@@ -94,17 +104,18 @@ namespace UnitAdmin
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseMvcWithDefaultRoute();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
                 //endpoints.MapControllerRoute("default" , "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
+
             });
         }
     }

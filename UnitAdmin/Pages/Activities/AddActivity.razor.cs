@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Activities
 {
-    public partial class AddActivity
+    public partial class AddActivity : ComponentBase
     {
         private ActivityModel activity = new ActivityModel();
 

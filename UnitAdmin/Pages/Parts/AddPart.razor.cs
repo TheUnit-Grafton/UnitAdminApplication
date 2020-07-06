@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Parts
 {
-    public partial class AddPart
+    public partial class AddPart : ComponentBase
     {
         
         public PartModel model { get; set; } = new PartModel();

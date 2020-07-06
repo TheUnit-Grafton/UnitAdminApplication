@@ -1,4 +1,5 @@
 ﻿using DataLibrary.Models;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages
 {
-    public partial class Index
+    public partial class Index : ComponentBase
     {
         private List<ActivityModel> _activities;
         private List<AnnouncementModel> _announcements;
