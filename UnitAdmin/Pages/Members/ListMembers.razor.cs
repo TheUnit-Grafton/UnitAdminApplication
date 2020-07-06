@@ -1,11 +1,12 @@
 ﻿using DataLibrary.Models;
+using Microsoft.AspNetCore.Components;
 using Syncfusion.Blazor.Grids;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace UnitAdmin.Pages.Members
 {
-    public partial class ListMembers
+    public partial class ListMembers : ComponentBase
     {
         private bool DisplayNonCurrent = false;
         private List<MemberModel> members;

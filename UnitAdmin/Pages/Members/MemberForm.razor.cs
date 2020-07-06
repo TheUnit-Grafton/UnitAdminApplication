@@ -1,10 +1,11 @@
-﻿using Syncfusion.Blazor.Inputs;
+﻿using Microsoft.AspNetCore.Components;
+using Syncfusion.Blazor.Inputs;
 using System;
 using System.IO;
 
 namespace UnitAdmin.Pages.Members
 {
-    public partial class MemberForm
+    public partial class MemberForm : ComponentBase
     {
         protected override void OnParametersSet()
         {
