@@ -26,5 +26,11 @@ namespace UnitAdmin.Pages.Parts
         {
             navMan.NavigateTo("/parts");
         }
+
+        private void DeleteRecord()
+        {
+            parts.DeletePart(partToEdit);
+            navMan.NavigateTo("/parts");
+        }
     }
 }
