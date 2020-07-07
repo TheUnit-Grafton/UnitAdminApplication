@@ -1,7 +1,7 @@
 ﻿<EditForm Model="@model" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
 
-    <div>
+    <div class="form-group">
         <label class="control-label">Type:</label>
         <select class="form-control" @bind="@model.Type">
             @foreach (Enums.PartType t in Enum.GetValues(typeof(Enums.PartType)))
@@ -11,26 +11,26 @@
         </select>
         <ValidationMessage For="(() => model.Type)" />
     </div>
-    <div>
+    <div class="form-group">
         <label class="control-label">Description:</label>
-        <InputTextArea class="form-con-lg" @bind-Value="@model.Description" placeholder="Description" />
+        <InputTextArea class="form-control" @bind-Value="@model.Description" placeholder="Description" />
         <ValidationMessage For="(() => model.Description)" />
     </div>
-    <div>
+    <div class="form-group">
         <label class="control-label">Brand:</label>
         <InputText class="form-control" @bind-Value="@model.Brand" placeholder="Brand" />
         <ValidationMessage For="(() => model.Brand)" />
     </div>
 
-    <div>
+    <div class="form-group">
         <label class="control-label">Capacity:</label>
-        <InputTextArea class="form-con-lg" @bind-Value="@model.Capacity" placeholder="Capacity" />
+        <InputTextArea class="form-control" @bind-Value="@model.Capacity" placeholder="Capacity" />
         <ValidationMessage For="(() => model.Capacity)" />
     </div>
 
-    <button class="btn btn-success m-3" type="submit">@buttonText</button>
-    <button @onclick="OnCancelClick" class="btn btn-danger m-3">Cancel</button>
-    @*<button @onclick="OnDeleteClick" class="btn btn-danger m-3">Delete Record</button>*@
+    <button class="btn btn-success m-2" type="submit">@buttonText</button>
+    <button @onclick="OnCancelClick" class="btn btn-outline-danger m-2" type="button">Cancel</button>
+    <button @onclick="OnDeleteClick" class="btn btn-danger m-2" type="button">Delete Record</button>
 </EditForm>
 
 @code {
@@ -38,6 +38,6 @@
     [Parameter] public string buttonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
     [Parameter] public EventCallback OnCancelClick { get; set; }
-    //[Parameter] public EventCallback OnDeleteClick { get; set; }
+    [Parameter] public EventCallback OnDeleteClick { get; set; }
 
 }

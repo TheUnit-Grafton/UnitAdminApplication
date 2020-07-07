@@ -2,9 +2,11 @@
 @inject IPartsService parts
 @inject NavigationManager navMan
   
-<h3>Edit Part</h3>
+<h3 class="lab-header-italic">Edit Part</h3>
 
-<PartForm model="@partToEdit" buttonText="Update Record" OnValidSubmit="@UpdateRecord" OnCancelClick="@CancelUpdate" />
+<PartForm model="@partToEdit" buttonText="Update Record" 
+          OnValidSubmit="@UpdateRecord" OnCancelClick="@CancelUpdate" 
+          OnDeleteClick="@DeleteRecord" />
 
 @code {
     [Parameter] public int id { get; set; }
