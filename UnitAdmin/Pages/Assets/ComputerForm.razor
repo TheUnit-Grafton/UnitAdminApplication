@@ -12,7 +12,7 @@
         <InputText class="form-control" @bind-Value="@model.Brand" placeholder="Brand" />
         <ValidationMessage For="@(() => model.Brand)" />
     </div>
-    
+
     <div class="form-group">
         <label class="control-label">Serial Number:</label>
         <InputTextArea class="form-control" @bind-Value="@model.SerialNumber" placeholder="Serial Number" />
@@ -21,10 +21,10 @@
 
     <div class="form-group">
         <label class="control-label">Computer Source:</label>
-        <InputText class="form-control" @bind-Value="@model.ObtainedFrom" placeholder ="Obtained from"/>
+        <InputText class="form-control" @bind-Value="@model.ObtainedFrom" placeholder="Obtained from" />
         <ValidationMessage For="@(() => model.ObtainedFrom)" />
     </div>
-   
+
     <div class="form-group">
         <label class="control-label">Form Factor:</label>
         <select class="form-control" @bind="@model.FormFactor">
@@ -36,7 +36,7 @@
         <ValidationMessage For="@(() => model.FormFactor)" />
     </div>
 
-    <div class="row">
+    <div class="row form-group">
         <div class="form-group m-2">
             <label class="control-label">Processor: </label>
             <InputText class="form-control" @bind-Value="@model.CPU" placeholder="CPU Type" />
@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row form-group">
         <div class="form-group m-2">
             <label class="control-label">Hard Drive Brand: </label>
             <InputText class="form-control" @bind-Value="@model.HardDriveBrand" placeholder="HDD Brand" />
@@ -85,19 +85,17 @@
             <InputText class="form-control" @bind-Value="@model.OperatingSystem" placeholder="Operating System and Version" />
             <ValidationMessage For="@(() => model.OperatingSystem)" />
         </div>
-        <div class="form-group m-8">
-            <SfCheckBox Label="Current Asset?" Checked="@model.IsCurrentAsset" ></SfCheckBox>
-        </div>
+
     </div>
-    <div class="row">
         <div class="form-group m-2">
             <label class="control-label">General Comments:</label>
-            <InputTextArea class="form-control" @bind-Value="@model.Comments" placeholder="Comments / Notes..." width="" />
+            <InputTextArea class="form-control" @bind-Value="@model.Comments" placeholder="Comments / Notes..." />
             <ValidationMessage For="@(() => model.Comments)" />
         </div>
-       
-    </div>
 
+    <div class="form-group m-8">
+        <SfCheckBox Label="Current Asset?" Checked="@model.IsCurrentAsset"></SfCheckBox>
+    </div>
     <button type="submit" class="btn btn-success m-3">@buttonText</button>
     <button @onclick="OnCancelClick" class="btn btn-danger m-3">Cancel</button>
 
