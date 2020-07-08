@@ -1,6 +1,7 @@
 using DataLibrary.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -68,7 +69,23 @@ namespace UnitAdmin
             // Add SyncFusion Community Blazor controls
             services.AddSyncfusionBlazor();
 
-            services.AddScoped<AuthenticationStateProvider , RevalidatingIdentityAuthenticationStateProvider<AppUser>>();
+            // Ensure correct Auth provider is being used with correct options
+            //services.AddScoped<AuthenticationStateProvider , RevalidatingIdentityAuthenticationStateProvider<AppUser>>();
+
+            #region Box 2
+            services.AddScoped<RevalidatingIdentityAuthenticationStateProvider<AppUser>>();
+            services.AddScoped<AuthenticationStateProvider>(s => s.GetRequiredService<RevalidatingIdentityAuthenticationStateProvider<AppUser>>());
+            services.AddScoped<IHostEnvironmentAuthenticationStateProvider>(sp =>
+            {
+                // this is safe because 
+                //     the `RevalidatingIdentityAuthenticationStateProvider` extends the `ServerAuthenticationStateProvider`
+                var provider = (ServerAuthenticationStateProvider)sp.GetRequiredService<AuthenticationStateProvider>();
+                return provider;
+            });
+
+            #endregion
+
+
 
             // Add fake Email sender for Identity
             // TODO: Replace mock email sender with real implementation
@@ -111,7 +128,7 @@ namespace UnitAdmin
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllers();
+                endpoints.MapControllers();
                 //endpoints.MapControllerRoute("default" , "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
