@@ -50,7 +50,7 @@ namespace UnitAdmin
 
             services.AddIdentity<AppUser , AppRole>(options =>
              {
-                 options.SignIn.RequireConfirmedAccount = false;
+                 options.SignIn.RequireConfirmedAccount = true;
                  options.User.RequireUniqueEmail = true;
                  
                  options.SignIn.RequireConfirmedEmail = false;
@@ -103,7 +103,7 @@ namespace UnitAdmin
         {
             //Register Syncfusion license
             Syncfusion.Licensing.SyncfusionLicenseProvider
-                .RegisterLicense("MjcxMjA3QDMxMzgyZTMxMmUzMGswbzZwN05NV0tENnZ1cDZkWUxBYjFCN09udVJyNjVhVnNVR3hWejNvWkU9;MjcxMjA4QDMxMzgyZTMxMmUzMEsyL1hWVkxwc0xqbytmdmhaWjJQZEErQWE0M1FuaVRYYUNaNVMvSjZ5M1E9;MjcxMjA5QDMxMzgyZTMxMmUzMExyR0MrUkhWS290dTZsNnRIMDFWQlk4VUROY1BoQS8zSERzTnFyOEVHN2M9;MjcxMjEwQDMxMzgyZTMxMmUzMGhTc1BENlQwTFo1OHN1ckhKNEI5MW5YVWJJRkI3R2p6ekF1b3lFL2l4bXc9;MjcxMjExQDMxMzgyZTMxMmUzMFQzSTBCV3hFdTJXQmRpdDM2eDJmbjB1S1J6Vk5Qcjh6bGsxcDVqekFJeGs9;MjcxMjEyQDMxMzgyZTMxMmUzMEhDNUxLSW8zc2tZTnpNemNYRmJUZFlVYlFTYzcwNWozblJQTWtsQXBKMUk9;MjcxMjEzQDMxMzgyZTMxMmUzMGxJajc4TzN2L2x3eWJNYWhlK1Z2S3diSGRhOGMza0pVOVZKZHd4MmxqUlU9;MjcxMjE0QDMxMzgyZTMxMmUzMG5SbFZrVFgxM3ptdUFQWCtxWGNvVU96dUNDS2VJbG9rZjgwNmk1Z3BrSDQ9;MjcxMjE1QDMxMzgyZTMxMmUzMGowWWR6cmNSTmNPbHZ2ZWNqb1VDRUZLTTk4NFVTMDh5MTVBZXJqa2xhSEU9;NT8mJyc2IWhia31ifWN9ZmVoYmF8YGJ8ampqanNiYmlmamlmanMDHmggNCc2NjA2Ezs8Jz4yOj99MDw+;MjcxMjE2QDMxMzgyZTMxMmUzMEJHdUoxK2haSUlDSXp0R0VXMXV2WnY3OFJHWHFnVktabFBKS05vNGdmK0U9");
+                .RegisterLicense(Constants.SFLicense);
 
             if (env.IsDevelopment())
             {
@@ -121,7 +121,7 @@ namespace UnitAdmin
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
 
             app.UseAuthentication();
             app.UseAuthorization();

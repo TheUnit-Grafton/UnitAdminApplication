@@ -6,10 +6,11 @@
 
 @using UnitAdmin.Areas.Identity;
 @using UnitAdmin.Components;
+@using UnitAdmin.Models;
 
 @inject NavigationManager navman
 @inject ILogger<SignIn> _logger;
-@inject RevalidatingIdentityAuthenticationStateProvider<IdentityUser> _riasp
+@inject RevalidatingIdentityAuthenticationStateProvider<AppUser> _riasp
 
 <h1 class="text-center">Sign In</h1>
 <hr />

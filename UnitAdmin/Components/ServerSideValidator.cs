@@ -13,7 +13,7 @@ namespace UnitAdmin.Components
       /// This will display error messages when the form elements have error, and can also be used after a ValidSubmit() 
       /// to post messages about the form.  For example, during SignIn if the UserName is not found, this can post a message.
       /// </summary>
-    public class ServerSideValidator : ComponentBase
+    public class ServerSideValidator : ComponentBase, IComponent
     {
         private ValidationMessageStore _messageStore;
 

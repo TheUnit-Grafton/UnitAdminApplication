@@ -6,14 +6,15 @@
 @using Microsoft.AspNetCore.WebUtilities;
 @using UnitAdmin.Areas.Identity.Extensions;
 @using UnitAdmin.Areas.Identity;
+@using UnitAdmin.Models;
 
 @inject NavigationManager navman;
 @inject ILogger<SignUpEmailConfirmed> _logger;
-@inject RevalidatingIdentityAuthenticationStateProvider<IdentityUser> _riasp;
+@inject RevalidatingIdentityAuthenticationStateProvider<AppUser> _riasp;
 
 @if (!string.IsNullOrEmpty(StatusMessage))
 {
-    <div class="container">
+    <div class="container"  >
         <h3 class="text-center">@StatusMessage</h3>
         @if (showSignIn)
         {
@@ -37,8 +38,8 @@
     {
         if (firstRender)
         {
-            navman.TryGetQueryString<string>("userId" , out userId);
-            navman.TryGetQueryString<string>("code" , out code);
+            navman.TryGetQueryString<string>("userId", out userId);
+            navman.TryGetQueryString<string>("code", out code);
             await Run();
         }
 
@@ -60,7 +61,7 @@
 
         var token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
 
-        // If you FindById, EF will hold onto the record because of the Key used.
+        // If you FindById, EF will hold onto the record because of the Key used.  
         // When you attempt to Confirm the Email address, an InvalidOperationException is thrown
         // System.InvalidOperationException: The instance of entity type 'IdentityUser' cannot be tracked because another instance with the same key value for {'Id'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
         // This is a bit of a conumdrum because either both calls have to use the same UserManager instance inside RIASP, or you have to find by Name, which is not a key.
@@ -74,7 +75,7 @@
         //}
 
         //var result = await _riasp.ConfirmEmailAsync(user, token);
-        var result = await _riasp.ConfirmEmailPlusFindFirstAsync(userId , token);
+        var result = await _riasp.ConfirmEmailPlusFindFirstAsync(userId, token);
         if (!result.Succeeded)
         {
             StatusMessage = "Error: " + result.Errors.ToList()[0].Code + ":" + result.Errors.ToList()[0].Description;
@@ -82,7 +83,7 @@
             return;
         }
 
-        var user = await _riasp.FindByIdAsync(userId);
+        var user =  await _riasp.FindByIdAsync(userId);
 
         StatusMessage = "Thank you " + user.UserName + " for confirming your email. Please Sign In to complete your profile.";
         showSignIn = true;
