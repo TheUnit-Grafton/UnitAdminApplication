@@ -18,7 +18,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
     public partial class SignUp : ComponentBase
     {
         [Inject] NavigationManager navman { get; set; }
-        [Inject] IJSRuntime jsruntime { get; set; }
+        //[Inject] IJSRuntime jsruntime { get; set; }
         [Inject] ILogger<SignUp> _logger { get; set; }
         [Inject] RevalidatingIdentityAuthenticationStateProvider<AppUser> _riasp { get; set; }
 
@@ -31,36 +31,6 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
         public bool showConfirmation { get; set; }
         public string EmailConfirmationUrl { get; set; }
 
-        /// <summary>
-        /// Made the class local for readability
-        /// </summary>
-        public class DtoSignUp
-        {
-            //[Required]
-            //[MinLength(6, ErrorMessage = "The {0} must be at least 6 characters")]
-            //[StringLength(64, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            //[RegularExpression(@"[^\s]+", ErrorMessage = "Spaces are not permitted.")]
-            //[Display(Name = "User Name")]
-            //public string UserName { get; set; }
-
-            [Required]
-            [MinLength(6, ErrorMessage = "The {0} must be at least 6 characters")]
-            [DataType(DataType.EmailAddress)]
-            [EmailAddress]
-            [Display(Name = "Email")]
-            public string Email { get; set; }
-
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-            [DataType(DataType.Password)]
-            [Display(Name = "Password")]
-            public string Password { get; set; }
-
-            [Required]
-            [Display(Name = "Confirm password")]
-            //[CompareProperty("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
-        }
 
         /// <summary>
         /// Sign Up object for new user
@@ -117,7 +87,10 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
 
                 //Using Email for UserName
                 IdentityUser = new AppUser();
+
+                // TODO: COmpete building user before submitting to create
                 IdentityUser.Email = input.Email;
+                IdentityUser.UserName = input.Email;
 
                 // Actually writing the user details to database
                 var result = await _riasp.CreateAsync(IdentityUser, input.Password);
