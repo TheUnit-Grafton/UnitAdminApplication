@@ -1,10 +1,11 @@
 ﻿@page "/SignOut"
 @using Microsoft.AspNetCore.Identity;
 @using Microsoft.Extensions.Logging;
+@using UnitAdmin.Models;
 
 @inject NavigationManager navman;
 @inject ILogger<SignOut> _logger;
-@inject RevalidatingIdentityAuthenticationStateProvider<IdentityUser> _riasp
+@inject RevalidatingIdentityAuthenticationStateProvider<AppUser> _riasp
 
 <AuthorizeView>
     <NotAuthorized>

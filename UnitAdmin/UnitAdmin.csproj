@@ -1,45 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-	<TargetFramework>netcoreapp3.1</TargetFramework>
-	<UserSecretsId>aspnet-UnitAdmin-C3F59A95-FD39-43F9-AA2F-9E1EA9E4856B</UserSecretsId>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-UnitAdmin-C3F59A95-FD39-43F9-AA2F-9E1EA9E4856B</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
-	<Compile Remove="Areas\Identity\Pages\Error.cshtml.cs" />
+    <ItemGroup>
+    <None Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+    <None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
+    <None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
+    <None Include="wwwroot\css\open-iconic\README.md" />
   </ItemGroup>
 
   <ItemGroup>
-	<Content Remove="Areas\Identity\Pages\Error.cshtml" />
-	<Content Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
-	<Content Remove="Pages\Members\Member.razor" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
+    <PackageReference Include="Syncfusion.Blazor" Version="18.2.0.44" />
   </ItemGroup>
 
   <ItemGroup>
-	<None Remove="Areas\Identity\Pages\_ViewStart.old" />
-	<None Remove="favicon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-	<None Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
-	<None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
-	<None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
-	<None Include="wwwroot\css\open-iconic\ICON-LICENSE" />
-	<None Include="wwwroot\css\open-iconic\README.md" />
-  </ItemGroup>
-
-  <ItemGroup>
-	  <PackageReference Include="Microsoft.AspNetCore.Components.DataAnnotations.Validation" Version="3.2.0-rc1.20223.4" />
-	  <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
-	<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
-	<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5" />
-	<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
-	<PackageReference Include="Syncfusion.Blazor" Version="18.1.0.59" />
-  </ItemGroup>
-
-  <ItemGroup>
-	<ProjectReference Include="..\DataLibrary\DataLibrary.csproj" />
+    <ProjectReference Include="..\DataLibrary\DataLibrary.csproj" />
   </ItemGroup>
 
 </Project>

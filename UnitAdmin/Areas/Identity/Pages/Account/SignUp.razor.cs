@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using UnitAdmin.Components;
+using UnitAdmin.Models;
 
 namespace UnitAdmin.Areas.Identity.Pages.Account
 {
@@ -19,7 +20,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
         [Inject] NavigationManager navman { get; set; }
         [Inject] IJSRuntime jsruntime { get; set; }
         [Inject] ILogger<SignUp> _logger { get; set; }
-        [Inject] RevalidatingIdentityAuthenticationStateProvider<IdentityUser> _riasp { get; set; }
+        [Inject] RevalidatingIdentityAuthenticationStateProvider<AppUser> _riasp { get; set; }
 
         [CascadingParameter] public Task<AuthenticationState> AuthenticationStateTask { get; set; }
         [Parameter] public string ReturnUrl { get; set; } = "/";
@@ -43,21 +44,21 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
             //public string UserName { get; set; }
 
             [Required]
-            [MinLength(6 , ErrorMessage = "The {0} must be at least 6 characters")]
+            [MinLength(6, ErrorMessage = "The {0} must be at least 6 characters")]
             [DataType(DataType.EmailAddress)]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100 , ErrorMessage = "The {0} must be at least {2} and at max {1} characters long." , MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [Required]
             [Display(Name = "Confirm password")]
-            //[CompareProperty("Password" , ErrorMessage = "The password and confirmation password do not match.")]
+            //[CompareProperty("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -71,7 +72,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
         /// </summary>
         public ServerSideValidator serverSideValidator;
 
-        public IdentityUser IdentityUser { get; set; }
+        public AppUser IdentityUser { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -87,11 +88,10 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
         private async Task ValidSubmit()
         {
             var result = await SignUpUser();
-            if (!result)
-                return;
+            if (!result) return;
             showSignUp = false;
 
-            EmailConfirmationUrl = await _riasp.GetUrl(IdentityUser , IdentityUser.Id , navman.BaseUri , "SignUpEmailConfirmed");
+            EmailConfirmationUrl = await _riasp.GetUrl(IdentityUser , IdentityUser.Id, navman.BaseUri, "SignUpEmailConfirmed");
             showConfirmation = true;
             StateHasChanged();
         }
@@ -111,18 +111,19 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
                 var user = await _riasp.FindByNameAsync(input.Email);
                 if (user != null)
                 { //Already exists
-                    serverSideValidator.AddError(input , nameof(input.Email) , "Sorry, try another username");
+                    serverSideValidator.AddError(input, nameof(input.Email), "Sorry, try another username");
                     return false;
                 }
 
                 //Using Email for UserName
-                IdentityUser = new IdentityUser(input.Email);
+                IdentityUser = new AppUser();
+                IdentityUser.Email = input.Email;
 
                 // Actually writing the user details to database
-                var result = await _riasp.CreateAsync(IdentityUser , input.Password);
+                var result = await _riasp.CreateAsync(IdentityUser, input.Password);
                 if (!result.Succeeded)
                 {
-                    serverSideValidator.AddError(input , result);
+                    serverSideValidator.AddError(input, result);
                     return false;
                 }
 
@@ -175,7 +176,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
             }
             catch (Exception ex)
             {
-                _logger.LogError("Internal Error {message}" , ex.Message);
+                _logger.LogError("Internal Error {message}", ex.Message);
                 throw ex;
             }
         }

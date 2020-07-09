@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
-using System.Text;
+﻿using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.WebUtilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace UnitAdmin.Areas.Identity
 {
@@ -104,9 +103,14 @@ namespace UnitAdmin.Areas.Identity
         public async Task<IdentityResult> ConfirmEmailAsync(TUser user , string token)
         {
             if (user == null)
+            {
                 return IdentityResult.Failed(new IdentityError() { Code = "ConfirmEmailAsync 1" , Description = "user is null" });
+            }
+
             if (string.IsNullOrEmpty(token))
+            {
                 return IdentityResult.Failed(new IdentityError() { Code = "ConfirmEmailAsync 2" , Description = "token is null" });
+            }
 
             // Get the user manager from a new scope to ensure it fetches fresh data
             var scope = _scopeFactory.CreateScope();
@@ -132,9 +136,14 @@ namespace UnitAdmin.Areas.Identity
         public async Task<IdentityResult> ConfirmEmailPlusFindFirstAsync(string id , string token)
         {
             if (string.IsNullOrEmpty(id))
+            {
                 return IdentityResult.Failed(new IdentityError() { Code = "ConfirmEmailAsync 1" , Description = "user is null" });
+            }
+
             if (string.IsNullOrEmpty(token))
+            {
                 return IdentityResult.Failed(new IdentityError() { Code = "ConfirmEmailAsync 2" , Description = "token is null" });
+            }
 
             // Get the user manager from a new scope to ensure it fetches fresh data
             var scope = _scopeFactory.CreateScope();
@@ -143,7 +152,10 @@ namespace UnitAdmin.Areas.Identity
                 var userManagerx = scope.ServiceProvider.GetRequiredService<UserManager<TUser>>();
                 var user = await userManagerx.FindByIdAsync(id);
                 if (user == null)
+                {
                     return null;
+                }
+
                 var result = await userManagerx.ConfirmEmailAsync(user , token);
                 return result;
             }
@@ -193,9 +205,14 @@ namespace UnitAdmin.Areas.Identity
         public async Task<IdentityResult> CreateAsync(TUser user , string password)
         {
             if (user == null)
+            {
                 return IdentityResult.Failed(new IdentityError() { Code = "CreateAsync 1" , Description = "user is null" });
+            }
+
             if (string.IsNullOrEmpty(password))
+            {
                 return IdentityResult.Failed(new IdentityError() { Code = "CreateAsync 2" , Description = "password is null" });
+            }
 
             var scope = _scopeFactory.CreateScope();
             try
@@ -220,7 +237,9 @@ namespace UnitAdmin.Areas.Identity
         public async Task<TUser> FindByIdAsync(string id)
         {
             if (string.IsNullOrEmpty(id))
+            {
                 return null;
+            }
 
             // Get the user manager from a new scope to ensure it fetches fresh data
             var scope = _scopeFactory.CreateScope();
@@ -246,7 +265,9 @@ namespace UnitAdmin.Areas.Identity
         public async Task<TUser> FindByNameAsync(string username)
         {
             if (string.IsNullOrEmpty(username))
+            {
                 return null;
+            }
 
             // Get the user manager from a new scope to ensure it fetches fresh data
             var scope = _scopeFactory.CreateScope();
@@ -272,7 +293,9 @@ namespace UnitAdmin.Areas.Identity
         public async Task<IList<Claim>> GetClaimsAsync(TUser user)
         {
             if (user == null)
+            {
                 return null;
+            }
             // Get the user manager from a new scope to ensure it fetches fresh data
             var scope = _scopeFactory.CreateScope();
             try
@@ -338,21 +361,32 @@ namespace UnitAdmin.Areas.Identity
         public async Task<SignInResult> PasswordSignInAsync(string userName , string password , bool isPersistent , bool lockoutOnFailure)
         {
             if (string.IsNullOrEmpty(userName))
+            {
                 return SignInResult.Failed;
+            }
+
             if (string.IsNullOrEmpty(password))
+            {
                 return SignInResult.Failed;
+            }
 
             var user = await FindByNameAsync(userName);
             if (user == null)
+            {
                 return SignInResult.Failed;
+            }
 
             var claims = await GetClaimsAsync(user);
             if (claims == null)
+            {
                 return SignInResult.Failed;
+            }
 
             var principal = await CreateUserPrincipalAsync(user);
             if (principal == null)
+            {
                 return SignInResult.Failed;
+            }
 
             // Create new list with claims as principal
             var resultU = claims.Union(principal.Claims , new ClaimComparer());
@@ -379,7 +413,9 @@ namespace UnitAdmin.Areas.Identity
         {
             var CPUser = (await this.GetAuthenticationStateAsync()).User;
             if (!CPUser.Identity.IsAuthenticated)
+            {
                 return null;
+            }
 
             var result = await PasswordSignInAsync(CPUser.Identity.Name , "x" , false , false);
             return CPUser;
@@ -406,15 +442,21 @@ namespace UnitAdmin.Areas.Identity
         {
             //Check whether the compared objects reference the same data.
             if (Object.ReferenceEquals(x , y))
+            {
                 return true;
+            }
 
             //Check whether any of the compared objects is null.
             if (Object.ReferenceEquals(x , null) || Object.ReferenceEquals(y , null))
+            {
                 return false;
+            }
 
             // Check if duplicate type but of different value, don't want it.
             if (x.Type == y.Type && x.Value != y.Value)
+            {
                 return true;
+            }
             //Check whether the Claims' properties are equal.
             //return x.Type == y.Type && x.Value == y.Value;
             return x.Type == y.Type;
@@ -424,7 +466,9 @@ namespace UnitAdmin.Areas.Identity
         {
             //Check whether the object is null
             if (Object.ReferenceEquals(claim , null))
+            {
                 return 0;
+            }
 
             //Get hash code for the Name field if it is not null.
             int hashType = claim.Type == null ? 0 : claim.Type.GetHashCode();
