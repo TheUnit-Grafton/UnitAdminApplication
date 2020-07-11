@@ -27,4 +27,8 @@
     <ProjectReference Include="..\DataLibrary\DataLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Pages\Account\Manage\" />
+  </ItemGroup>
+
 </Project>

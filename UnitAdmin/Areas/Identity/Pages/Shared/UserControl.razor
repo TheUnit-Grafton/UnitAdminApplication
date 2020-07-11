@@ -1,0 +1,16 @@
+﻿@using UnitAdmin.Models
+
+<EditForm Model="@userModel" OnValidSubmit="@validSubmit">
+
+</EditForm>
+
+@code{
+    [Parameter] public AppUser userModel { get; set; }
+    [Parameter] public string userButtonText { get; set; } = "Save";
+
+    [Parameter] public EventCallback validSubmit { get; set; }
+
+    
+
+
+}
