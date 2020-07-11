@@ -9,18 +9,18 @@
         <NavLink class="nav-link" href="/SignOut">
             <span class="oi oi-account-logout" aria-hidden="true"></span> Sign Out
         </NavLink>
-        <form method="post" action="Identity/Account/LogOut">
+        @*<form method="post" action="Identity/Account/LogOut">
             <button type="submit" class="nav-link btn btn-link">Log out</button>
-        </form>
+        </form>*@
     </Authorized>
     <NotAuthorized>
-        <NavLink class="nav-link" href="/SignUp">
+        @*<NavLink class="nav-link" href="/SignUp">
             <span class="oi oi-pencil" aria-hidden="true"></span> Sign Up
-        </NavLink>
+        </NavLink>*@
         <NavLink class="nav-link" href="/SignIn">
             <span class="oi oi-account-login" aria-hidden="true"></span> Sign In
         </NavLink>
-        <a href="Identity/Account/Register">Register</a>
-        <a href="Identity/Account/Login">Log in</a>
+        @*<a href="Identity/Account/Register">Register</a>
+        <a href="Identity/Account/Login">Log in</a>*@
     </NotAuthorized>
 </AuthorizeView>
