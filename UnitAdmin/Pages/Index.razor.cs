@@ -34,7 +34,7 @@ namespace UnitAdmin.Pages
         private async Task Update()
         {
             _activities = await whatsOn.GetActivitiesAsync(DisplayNonCurrent);
-            _announcements = notices.GetAnnouncements(false); // Only return current announcements to Index page
+            _announcements = await notices.GetAnnouncementsAsync(false); // Only return current announcements to Index page
         }
 
    

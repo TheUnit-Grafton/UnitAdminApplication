@@ -14,17 +14,17 @@ namespace UnitAdmin.Pages.Announcements
         [Parameter]
         public int Id { get; set; } = 0;
 
-        protected override void OnInitialized()
+        protected async override Task OnInitializedAsync()
         {
             if (Id != 0)
             {
-                model = announcements.GetAnnouncementById(Id);
+                model = await announcements.GetAnnouncementByIdAsync(Id);
             }
         }
 
-        public void SaveAnnouncement()
+        public async Task SaveAnnouncementAsync()
         {
-            announcements.SaveAnnouncement(model);
+            await announcements.SaveAnnouncementAsync(model);
             navMan.NavigateTo("/announcements");
         }
     }
