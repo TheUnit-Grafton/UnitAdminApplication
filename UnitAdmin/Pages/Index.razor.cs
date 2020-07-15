@@ -15,9 +15,9 @@ namespace UnitAdmin.Pages
 
         public bool DisplayNonCurrent = false;
 
-        protected override void OnInitialized()
+        protected async override Task OnInitializedAsync()
         {
-           Update();
+           await Update();
         }
 
         public void AddActivity()
@@ -25,15 +25,15 @@ namespace UnitAdmin.Pages
             navMan.NavigateTo("/Activity/Add");
         }
 
-        public void ToggleCurrentActivities()
+        public async Task ToggleCurrentActivities()
         {
             DisplayNonCurrent = !DisplayNonCurrent;
-            Update();
+            await Update();
         }
 
-        private void Update()
+        private async Task Update()
         {
-            _activities =  whatsOn.GetActivities(DisplayNonCurrent);
+            _activities = await whatsOn.GetActivitiesAsync(DisplayNonCurrent);
             _announcements = notices.GetAnnouncements(false); // Only return current announcements to Index page
         }
 

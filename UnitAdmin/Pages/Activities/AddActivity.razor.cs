@@ -12,10 +12,10 @@ namespace UnitAdmin.Pages.Activities
     {
         private ActivityModel activity = new ActivityModel();
 
-        protected void CreateActivity()
+        protected async Task CreateActivityAsync()
             
         {
-            whatsOn.AddActivity(activity);
+            await whatsOn.AddActivityAsync(activity);
             navMan.NavigateTo("/");
         }
 

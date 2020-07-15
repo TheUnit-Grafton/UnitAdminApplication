@@ -12,14 +12,14 @@ namespace UnitAdmin.Pages.Activities
     {
         private ActivityModel activity { get; set; }
 
-        protected override void OnParametersSet()
+        protected async override void OnParametersSet()
         {
-            activity = whatsOn.GetActivity(id);
+           activity = await whatsOn.GetActivityAsync(id);
         }
 
-        private void SaveActivity()
+        private async Task SaveActivityAsync()
         {
-            whatsOn.UpdateActivity(activity);
+            await whatsOn.UpdateActivityAsync(activity);
             navMan.NavigateTo("/");
         }
 
@@ -28,11 +28,11 @@ namespace UnitAdmin.Pages.Activities
             navMan.NavigateTo("/");
         }
 
-        public void DeleteActivity()
+        public async Task DeleteActivityAsync()
         {
             // TODO: Wrap Delete confirmation in SyncFusion Dialog box
 
-            whatsOn.DeleteActivity(activity);
+            await whatsOn.DeleteActivityAsync(activity);
 
             // TODO: Add Exception Handling
 
