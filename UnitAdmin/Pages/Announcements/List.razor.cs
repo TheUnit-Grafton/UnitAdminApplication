@@ -13,29 +13,29 @@ namespace UnitAdmin.Pages.Announcements
         private List<AnnouncementModel> _announcements;
         private bool displayNonCurrent = false;
 
-        protected override void OnInitialized()
+        protected async override Task OnInitializedAsync()
         {
-            UpdateAnnouncements();
+            await UpdateAnnouncements();
         }
 
-        public void UpdateAnnouncements()
+        public async Task UpdateAnnouncements()
         {
             if (displayNonCurrent)
             {
                 // Display all items - Non-Current checkbox is ticked
-                _announcements = notices.GetAnnouncements(true);
+                _announcements = await notices.GetAnnouncementsAsync(true);
             }
             else
             {
                 // Only return currennt items
-                _announcements =  notices.GetAnnouncements(false);
+                _announcements = await notices.GetAnnouncementsAsync(false);
             }
         }
 
-        public void ToggleNonCurrentDisplay()
+        public async Task ToggleNonCurrentDisplay()
         {
             displayNonCurrent = !displayNonCurrent;
-            UpdateAnnouncements();
+            await UpdateAnnouncements();
         }
 
         public void EditAnnouncement(RecordDoubleClickEventArgs<AnnouncementModel> args)
