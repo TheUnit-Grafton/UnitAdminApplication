@@ -22,7 +22,21 @@ namespace DataLibrary.Data
             _db.SaveChanges();
         }
 
-        public async Task<PartModel> UpdatePart(PartModel part)
+        public async Task SavePartAsync(PartModel part)
+        {
+            _db.Parts.Add(part);
+            await _db.SaveChangesAsync();
+        }
+
+        public PartModel UpdatePart(PartModel part)
+        {
+            _db.Parts.Attach(part);
+            _db.Entry(part).State = EntityState.Modified;
+            _db.SaveChanges();
+            return part;
+        }
+
+        public async Task<PartModel> UpdatePartAsync(PartModel part)
         {
             _db.Parts.Attach(part);
             _db.Entry(part).State = EntityState.Modified;
@@ -35,16 +49,32 @@ namespace DataLibrary.Data
             return _db.Parts;
         }
 
+        public async Task<IEnumerable<PartModel>> GetPartsInStockAsync()
+        {
+            return await _db.Parts.ToListAsync();
+        }
+
         public PartModel GetPartById(int id)
         {
             var output = _db.Parts.Where(p => p.Id == id).FirstOrDefault();
             return output;
         }
 
+        public async Task<PartModel> GetPartByIdAsync(int id)
+        {
+            return await _db.Parts.Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
         public void DeletePart(PartModel model)
         {
             _db.Parts.Remove(model);
             _db.SaveChanges();
+        }
+
+        public async Task DeletePartAsync(PartModel model)
+        {
+            _db.Parts.Remove(model);
+            await _db.SaveChangesAsync();
         }
     }
 }

@@ -6,14 +6,15 @@ namespace DataLibrary.Data
 {
     public interface IPartsService
     {
-        void SavePart(PartModel part);
-
-        Task<PartModel> UpdatePart(PartModel part);
-
-        PartModel GetPartById(int id);
-
-        IEnumerable<PartModel> GetPartsInStock();
-
         void DeletePart(PartModel model);
+        Task DeletePartAsync(PartModel model);
+        PartModel GetPartById(int id);
+        Task<PartModel> GetPartByIdAsync(int id);
+        IEnumerable<PartModel> GetPartsInStock();
+        Task<IEnumerable<PartModel>> GetPartsInStockAsync();
+        void SavePart(PartModel part);
+        Task SavePartAsync(PartModel part);
+        PartModel UpdatePart(PartModel part);
+        Task<PartModel> UpdatePartAsync(PartModel part);
     }
 }
