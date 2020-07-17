@@ -8,11 +8,11 @@ namespace UnitAdmin.Pages.Members
 {
     public partial class MemberForm : ComponentBase
     {
-        protected override async Task OnParametersSetAsync()
+        protected override void OnParametersSet()
         {
             if (string.IsNullOrWhiteSpace(model.PhotoPath))
             {
-                return;
+               
             }
             else
             {
