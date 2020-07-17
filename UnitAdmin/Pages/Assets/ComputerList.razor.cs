@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Syncfusion.Blazor.Grids;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Assets
 {
@@ -11,9 +12,9 @@ namespace UnitAdmin.Pages.Assets
     {
         private List<ComputerModel> computers { get; set; }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            computers = _computers.GetCurrentComputers().ToList();
+            computers = (List<ComputerModel>)await _computers.GetCurrentComputersAsync();
         }
 
         public void AddComputer()

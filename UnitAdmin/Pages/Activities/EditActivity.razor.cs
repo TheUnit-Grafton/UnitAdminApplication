@@ -12,7 +12,7 @@ namespace UnitAdmin.Pages.Activities
     {
         private ActivityModel activity { get; set; }
 
-        protected async override void OnParametersSet()
+        protected async override Task OnParametersSetAsync()
         {
            activity = await whatsOn.GetActivityAsync(id);
         }

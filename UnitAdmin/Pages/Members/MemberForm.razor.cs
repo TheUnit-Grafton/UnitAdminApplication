@@ -2,12 +2,13 @@
 using Syncfusion.Blazor.Inputs;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Members
 {
     public partial class MemberForm : ComponentBase
     {
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
             if (string.IsNullOrWhiteSpace(model.PhotoPath))
             {

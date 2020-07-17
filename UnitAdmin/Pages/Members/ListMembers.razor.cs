@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Syncfusion.Blazor.Grids;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Members
 {
@@ -11,9 +12,9 @@ namespace UnitAdmin.Pages.Members
         private bool DisplayNonCurrent = false;
         private List<MemberModel> members;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            Update();
+            await Update();
         }
 
         private void ToggleCurrentMembers()
@@ -21,15 +22,15 @@ namespace UnitAdmin.Pages.Members
             DisplayNonCurrent = !DisplayNonCurrent;
         }
 
-        private void Update()
+        private async Task Update()
         {
             if (DisplayNonCurrent)
             {
-                members = _context.GetAllMembers().ToList();
+                members = (List<MemberModel>)await _context.GetAllMembersAsync();
             }
             else
             {
-                members = _context.GetActiveMembers().ToList();
+                members = (List<MemberModel>)await _context.GetActiveMembersAsync();
             }
         }
 

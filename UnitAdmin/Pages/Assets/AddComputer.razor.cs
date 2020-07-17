@@ -12,9 +12,9 @@ namespace UnitAdmin.Pages.Assets
     {
         private ComputerModel model = new ComputerModel();
 
-        public void AddNewComputer()
+        public async Task AddNewComputer()
         {
-            _context.AddComputer(model);
+            await _context.AddComputerAsync(model);
             navMan.NavigateTo("/Computers");
         }
 

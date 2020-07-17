@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Syncfusion.Blazor.Grids;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Parts
 {
@@ -17,9 +18,9 @@ namespace UnitAdmin.Pages.Parts
 
         private List<PartModel> parts { get; set; }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            parts = _Parts.GetPartsInStock().ToList();
+            parts = (List<PartModel>)await _Parts.GetPartsInStockAsync();
         }
 
         public void AddPart()

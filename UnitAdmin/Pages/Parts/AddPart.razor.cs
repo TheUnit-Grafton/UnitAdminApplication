@@ -13,9 +13,9 @@ namespace UnitAdmin.Pages.Parts
         
         public PartModel model { get; set; } = new PartModel();
 
-        private void SavePart()
+        private async Task SavePart()
         {
-            parts.SavePart(model);
+            await parts.SavePartAsync(model);
             navMan.NavigateTo("/Parts");
         }
 

@@ -11,14 +11,14 @@ namespace UnitAdmin.Pages.Parts
     {
         private PartModel partToEdit;
 
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
-            partToEdit = parts.GetPartById(id);
+            partToEdit = await parts.GetPartByIdAsync(id);
         }
 
-        private void UpdateRecord()
+        private async Task UpdateRecord()
         {
-            parts.SavePart(partToEdit);
+            await parts.SavePartAsync(partToEdit);
             navMan.NavigateTo("/parts");
         }
 
