@@ -16,14 +16,14 @@ namespace UnitAdmin.Pages.Assets
 
         public ComputerModel model { get; set; }
 
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
-            model = _context.GetComputerById(id);
+            model = await _context.GetComputerByIdAsync(id);
         }
 
-        public void UpdateComputer()
+        public async Task UpdateComputer()
         {
-            _context.UpdateComputer(model);
+            await _context.UpdateComputerAsync(model);
             navMan.NavigateTo("/computers");
         }
 
@@ -32,9 +32,9 @@ namespace UnitAdmin.Pages.Assets
             navMan.NavigateTo("/computers");
         }
 
-        public void DeleteComputer()
+        public async Task DeleteComputerAsync()
         {
-            _context.DeleteComputer(model);
+            await _context.DeleteComputerAsync(model);
             navMan.NavigateTo("/computers");
         }
     }

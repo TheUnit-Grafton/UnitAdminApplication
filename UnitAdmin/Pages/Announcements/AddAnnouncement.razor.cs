@@ -14,7 +14,7 @@ namespace UnitAdmin.Pages.Announcements
         [Parameter]
         public int Id { get; set; } = 0;
 
-        protected async override Task OnInitializedAsync()
+        protected override async Task OnInitializedAsync()
         {
             if (Id != 0)
             {

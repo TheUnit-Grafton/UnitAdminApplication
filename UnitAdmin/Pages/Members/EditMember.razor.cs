@@ -11,14 +11,14 @@ namespace UnitAdmin.Pages.Members
     {
         private MemberModel member;
 
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
-            member = _context.GetMember(id);
+            member = await _context.GetMemberAsync(id);
         }
 
-        private void UpdateRecord()
+        private async Task UpdateRecord()
         {
-            _context.AddMember(member);
+            await _context.AddMemberAsync(member);
             navMan.NavigateTo("/members");
         }
 
@@ -27,9 +27,9 @@ namespace UnitAdmin.Pages.Members
             navMan.NavigateTo("/members");
         }
 
-        public void DeleteMember(MemberModel model)
+        public async Task DeleteMember(MemberModel model)
         {
-            _context.DeleteMember(model);
+            await _context.DeleteMemberAsync(model);
             navMan.NavigateTo("/members");
         }
     }
