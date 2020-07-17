@@ -12,11 +12,11 @@ namespace UnitAdmin.Pages.Members
         {
             if (string.IsNullOrWhiteSpace(model.PhotoPath))
             {
-
+                return;
             }
             else
             {
-
+               
             }
         }
 
