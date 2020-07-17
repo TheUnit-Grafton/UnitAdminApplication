@@ -11,7 +11,7 @@ namespace UnitAdmin.Pages.Members
     {
         private MemberModel newMember = new MemberModel();
 
-        public async Task SaveMemberAsync()
+        public async Task SaveMember()
         {
             await _context.AddMemberAsync(newMember);
             navMan.NavigateTo("/members");
