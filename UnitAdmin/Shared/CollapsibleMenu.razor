@@ -1,0 +1,78 @@
+﻿<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">The UnIT Grafton</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<DxTreeView @ref="@treeView"
+            CssClass="app-sidebar"
+            ExpandButtonIconCssClass="demo-icon-expand"
+            CollapseButtonIconCssClass="demo-icon-collapse"
+            AllowSelectNodes="true"
+            NodeExpandCollapseAction="TreeViewNodeExpandCollapseAction.NodeClick"
+            BeforeExpand="@BeforeExpand"
+            SelectionChanged="@SelectionChanged">
+    <Nodes>
+        <DxTreeViewNode CssClass="nav-item nav-link" IconCssClass="oi oi-home" Text="Home" NavigateUrl="/" />
+        <DxTreeViewNode Text="Assets" CssClass="nav-item nav-link" IconCssClass="oi oi-caret-bottom">
+            <Nodes>
+                <DxTreeViewNode CssClass="nav-item nav-link" IconCssClass="oi oi-monitor" Text="Computers" NavigateUrl="/computers"></DxTreeViewNode>
+                <DxTreeViewNode CssClass="nav-item nav-link" IconCssClass="oi oi-hard-drive" Text="Parts" NavigateUrl="/parts"></DxTreeViewNode>
+            </Nodes>
+        </DxTreeViewNode>
+        <DxTreeViewNode CssClass="nav-item nav-link" IconCssClass="oi oi-caret-bottom" Text="Administration">
+            <Nodes>
+                <DxTreeViewNode CssClass="nav-item nav-link" IconCssClass="oi oi-microphone" Text="Announcements" NavigateUrl="/announcements"></DxTreeViewNode>
+            </Nodes>
+        </DxTreeViewNode>
+    </Nodes>
+
+</DxTreeView>
+<UnitLearningMenuItem></UnitLearningMenuItem>
+
+@code{
+    protected DxTreeView treeView;
+    protected bool collapseNavMenu = true;
+
+    protected string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+
+    protected void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+
+    protected void SelectionChanged(TreeViewNodeEventArgs e)
+    {
+        if (e.NodeInfo.IsLeaf)
+        {
+            var parentInfo = e.NodeInfo.Parent;
+            if (parentInfo != null)
+            {
+                var parentSiblingNodesInfo = treeView.GetNodesInfo(n => !n.IsLeaf && n.Level == parentInfo.Level && !string.Equals(n.Text , parentInfo.Text));
+                foreach (var nodeInfo in parentSiblingNodesInfo)
+                    treeView.SetNodeExpanded(n => string.Equals(n.Text , nodeInfo.Text) , false);
+            }
+            else
+                treeView.CollapseAll();
+        }
+    }
+
+    protected void BeforeExpand(TreeViewNodeCancelEventArgs e)
+    {
+        if (!e.CausedByAPI)
+            treeView.CollapseAll();
+    }
+
+    bool IsDebug()
+    {
+#if DEBUG
+        return true;
+#else
+    return false;
+#endif
+    }
+
+}
+}
