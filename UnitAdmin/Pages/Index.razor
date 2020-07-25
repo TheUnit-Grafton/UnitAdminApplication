@@ -11,7 +11,7 @@
 }
 else
 {
-    @if (_announcements.Count > 0)
+    @if (_announcements != null && _announcements.Count > 0)
     {
         foreach (var announcement in _announcements)
         {
