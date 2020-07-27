@@ -30,9 +30,9 @@
                                 <div class="container-fluid mycontainer">
                                     <div class="form-group row ">
                                         <div class="col">
-                                            <label for="username">Email</label>
-                                            <InputText class="mycontainer-inputsize" id="username" @bind-Value="input.Email" Width="100%" />
-                                            <ValidationMessage For="@(() => input.Email)" />
+                                            <label for="username">Username</label>
+                                            <InputText class="mycontainer-inputsize" id="username" @bind-Value="input.Username" Width="100%" />
+                                            <ValidationMessage For="@(() => input.Username)" />
                                         </div>
 
                                     </div>
@@ -53,7 +53,7 @@
                                 <div class="col text-center">
                                     <button type="submit" class="btn btn-primary">SignIn</button>
                                 </div>
-                                <div class="form-group mycontainer-signin-navlinks">
+                                @*<div class="form-group mycontainer-signin-navlinks">
                                     <NavLink class="nav-link" href="/PasswordForgot">
                                         <span class="oi oi-lock-locked oi-question-mark" aria-hidden="true"></span> Forgot your password?
                                     </NavLink>
@@ -63,14 +63,14 @@
                                     <NavLink class="nav-link" href="/ResendConfirmationEmail">
                                         <span class="oi oi-envelope-closed" aria-hidden="true"></span> Resend Confirmation Email
                                     </NavLink>
-                                </div>
+                                </div>*@
                             </EditForm>
                         </div>
                     </NotAuthorized>
                 </AuthorizeView>
             </section>
         </div>
-        <div class="col-md-4 col-md-offset-2">
+        @*<div class="col-md-4 col-md-offset-2">
             <section>
                 <h4>Use another service to log in.</h4>
                 <hr />
@@ -87,7 +87,7 @@
                     }
                 }
             </section>
-        </div>
+        </div>*@
     </div>
 </div>
 
@@ -96,74 +96,4 @@
     [Parameter] public string ReturnUrl { get; set; } = "/";
     public AuthenticationState AuthState { get; set; }
     public ClaimsPrincipal CPUser { get; set; }
-
-    private class DtoSignIn
-    {
-        [Required]
-        [Display(Name = "Email *")]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
-
-        //TODO: this may need an attribute
-        public string Token { get; set; }
-    }
-
-    /// <summary>
-    /// Sign In object for new user
-    /// </summary>
-    private DtoSignIn input { get; set; } = new DtoSignIn();
-
-    /// <summary>
-    /// Object to process a dictionary of errors per field and display them on form
-    /// </summary>
-    public ServerSideValidator serverSideValidator;
-
-    protected override async Task OnInitializedAsync()
-    {
-        AuthState = await AuthenticationStateTask;
-        CPUser = AuthState.User;
-    }
-
-    /// <summary>
-    /// Invoked by <EditForm> when submit button is clicked.
-    /// </summary>
-    /// <returns></returns>
-    private async Task ValidSubmit()
-    {
-        // Does the username currently exist?
-        var user = await _riasp.FindByNameAsync(input.Email);
-        if (user == null)
-        {
-            serverSideValidator.AddError(input , nameof(input.Email) , "Sorry, couldn't find that Email Name");
-            return;
-        }
-
-        var isPasswordOk = await _riasp.CheckPasswordAsync(user , input.Password);
-        if (!isPasswordOk)
-        {
-            serverSideValidator.AddError(input , nameof(input.Password) , "Sorry, incorrect password");
-            return;
-        }
-
-        var result = await _riasp.PasswordSignInAsync(user.UserName , input.Password , input.RememberMe , false);
-        if (!result.Succeeded)
-        {
-            serverSideValidator.AddError(input , nameof(input.Email) , "Sorry, Could not Sign you in");
-            return;
-        }
-        navman.NavigateTo(ReturnUrl);
-        return;
-    }
-
-    private void InvalidSubmit()
-    {
-        return;
-    }
 }

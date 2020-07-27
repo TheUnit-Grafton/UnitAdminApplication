@@ -1,0 +1,95 @@
+﻿@page "/admin/manage/roles"
+
+@using UnitAdmin.Data
+@using UnitAdmin.Models
+@using Syncfusion.Blazor.DropDowns
+@using Microsoft.AspNetCore.Identity
+
+
+@inject UserManager<AppUser> _userManager
+ 
+<div>
+    <h3 class="lab-header-italic">Manage Security Roles</h3>
+    <hr />
+</div>
+<div class="row">
+    <div class="col-5 m-2">
+        @*List of current roles*@
+        Roles currently defined:
+        <SfListBox TValue="string[]" TItem="AppRole"
+                   DataSource="@roleList"
+                   Height="175">
+            <ListBoxSelectionSettings Mode="Syncfusion.Blazor.DropDowns.SelectionMode.Single"></ListBoxSelectionSettings>
+            <ListBoxFieldSettings Text="Name" Value="Id" />
+            <ListBoxEvents TValue="string[]" ValueChange="ChangeSelection"></ListBoxEvents>
+        </SfListBox>
+    </div>
+    <div class="col-5 m-2">
+        @* Add  / Edit Role *@
+        Add or Edit Role
+        <EditForm Model="@_role" OnSubmit="@SaveRole">
+            <div class="form-group">
+                <InputText class="form-control" @bind-Value="@_role.Name" placeholder="Role" />
+            </div>
+            <button type="submit" class="btn btn-success m-3">Save</button>
+            <button @onclick="OnCancelClick" class="btn btn-danger m-3">Cancel</button>
+        </EditForm>
+    </div>
+</div>
+
+@code{
+
+    SfListBox<string[] , AppRole> rolesListBox;
+
+    protected List<AppRole> roleList;
+    private AppRole _role = new AppRole();
+
+    [Inject]
+    private RoleManager<AppRole> _roleManager { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        roleList =  _roleManager.Roles.ToList();
+
+    }
+
+    private void ChangeSelection()
+    {
+        _role.Name = rolesListBox.Value.ToString();
+
+    }
+
+
+    private async Task SaveRole()
+    {
+
+
+        var findRole = await _roleManager.FindByIdAsync(_role.Id);
+
+        if (findRole == null)
+        {
+            // There is no Id, so this is a new Role
+            roleList.Add(_role);
+            await _roleManager.CreateAsync(_role);
+            Rebind();
+        }
+        else
+        {
+            // Update the existing role
+
+            await _roleManager.UpdateAsync(_role);
+            Rebind();
+        }
+    }
+
+    private void Rebind()
+    {
+        rolesListBox.Refresh();
+        _role = new AppRole();
+    }
+
+    private void OnCancelClick()
+    {
+        _role = new AppRole();
+    }
+}

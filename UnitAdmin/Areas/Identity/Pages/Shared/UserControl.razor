@@ -1,7 +1,34 @@
 ﻿@using UnitAdmin.Models
+@inject RevalidatingIdentityAuthenticationStateProvider<AppUser> _riasp
+
+<h3 class="lab-header-italic text-center">Add or Edit User</h3>
 
 <EditForm Model="@userModel" OnValidSubmit="@validSubmit">
-
+    <DataAnnotationsValidator />
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label">Firstname:</label>
+            <InputText class="form-control" @bind-Value="@userModel.FirstName" placeholder="First Name" />
+            <ValidationMessage For="@(() => userModel.FirstName)" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Surname:</label>
+            <InputText class="form-control" @bind-Value="@userModel.LastName" placeholder="Surname" />
+            <ValidationMessage For="@(() => userModel.LastName)" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label class="control-label">Email:</label>
+            <InputText class="form-control" @bind-Value="@userModel.Email" placeholder="Email Address" />
+            <ValidationMessage For="@(() => userModel.Email)" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">Phone:</label>
+            <InputText class="form-control" @bind-Value="@userModel.PhoneNumber" placeholder="Phone Number" />
+            <ValidationMessage For="@(() => userModel.PhoneNumber)" />
+        </div>
+    </div>
 </EditForm>
 
 @code{
@@ -9,8 +36,6 @@
     [Parameter] public string userButtonText { get; set; } = "Save";
 
     [Parameter] public EventCallback validSubmit { get; set; }
-
-    
-
+    [CascadingParameter] public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
 }

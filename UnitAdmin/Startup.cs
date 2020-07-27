@@ -85,11 +85,12 @@ namespace UnitAdmin
 
             #endregion
 
-           
+            services.AddScoped<SecurityService>();
 
             // Add fake Email sender for Identity
             // TODO: Replace mock email sender with real implementation
             services.AddSingleton<IEmailSender , MockEmailSender>();
+            services.AddScoped<IUserTwoFactorTokenProvider<AppUser> , MockTwoFactorAuthTokenProvider>();
 
             services.AddScoped<IActivityService , ActivityService>();
             services.AddScoped<IAnnouncementService , AnnouncementService>();

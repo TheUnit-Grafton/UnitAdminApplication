@@ -19,6 +19,27 @@
                                     <div class="container-fluid mycontainer">
                                         <div class="form-group row">
                                             <div class="col">
+                                                <label for="FirstName">First Name</label>
+                                                <InputText class="mycontainer-inputsize" Id="firstname" @bind-Value="input.FirstName" Width="100%" />
+                                                <ValidationMessage For="@(() => input.FirstName)" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col">
+                                                <label for="LastName">Last Name</label>
+                                                <InputText class="mycontainer-inputsize" Id="Username" @bind-Value="input.LastName" Width="100%" />
+                                                <ValidationMessage For="@(() => input.LastName)" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col">
+                                                <label for="Username">User Name</label>
+                                                <InputText class="mycontainer-inputsize" Id="Username" @bind-Value="input.UserName" Width="100%" />
+                                                <ValidationMessage For="@(() => input.UserName)" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col">
                                                 <label for="Email">Email</label>
                                                 <InputText class="mycontainer-inputsize" Id="Email" @bind-Value="input.Email" Width="100%" />
                                                 <ValidationMessage For="@(() => input.Email)" />
@@ -51,7 +72,7 @@
                     </AuthorizeView>
                 </section>
             </div>
-            <div class="col-md-4 col-md-offset-2">
+            @*<div class="col-md-4 col-md-offset-2">
                 <section>
                     <h4>Use another service to sign up.</h4>
                     <hr />
@@ -68,12 +89,12 @@
                         }
                     }
                 </section>
-            </div>
+            </div>*@
         </div>
     </div>
 }
 
-@if (showConfirmation)
+@*@if (showConfirmation)
 {
     <div class="container">
         <h3>
@@ -83,5 +104,5 @@
             <a id="confirm-link" href="@EmailConfirmationUrl">Click here to confirm your account</a>
         </h3>
     </div>
-}
+}*@
 
