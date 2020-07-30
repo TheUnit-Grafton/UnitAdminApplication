@@ -23,8 +23,8 @@ namespace UnitAdmin.Models
         [NotMapped]
         public IEnumerable<string> RoleNames { get; set; }
 
-        [IgnoreDataMember]
-        public override string PasswordHash { get; set; }
+        //[IgnoreDataMember]
+        //public override string PasswordHash { get; set; }
 
         [IgnoreDataMember, NotMapped]
         public string Password { get; set; }

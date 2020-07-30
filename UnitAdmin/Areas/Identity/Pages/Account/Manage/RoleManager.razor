@@ -2,7 +2,6 @@
 
 @using UnitAdmin.Data
 @using UnitAdmin.Models
-@using Syncfusion.Blazor.DropDowns
 @using Microsoft.AspNetCore.Identity
 
 
@@ -16,13 +15,9 @@
     <div class="col-5 m-2">
         @*List of current roles*@
         Roles currently defined:
-        <SfListBox TValue="string[]" TItem="AppRole"
-                   DataSource="@roleList"
-                   Height="175">
-            <ListBoxSelectionSettings Mode="Syncfusion.Blazor.DropDowns.SelectionMode.Single"></ListBoxSelectionSettings>
-            <ListBoxFieldSettings Text="Name" Value="Id" />
-            <ListBoxEvents TValue="string[]" ValueChange="ChangeSelection"></ListBoxEvents>
-        </SfListBox>
+        <DxListBox Data="@roleList">
+
+        </DxListBox>
     </div>
     <div class="col-5 m-2">
         @* Add  / Edit Role *@
@@ -39,25 +34,18 @@
 
 @code{
 
-    SfListBox<string[] , AppRole> rolesListBox;
-
     protected List<AppRole> roleList;
     private AppRole _role = new AppRole();
 
     [Inject]
     private RoleManager<AppRole> _roleManager { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         roleList =  _roleManager.Roles.ToList();
 
     }
 
-    private void ChangeSelection()
-    {
-        _role.Name = rolesListBox.Value.ToString();
-
-    }
 
 
     private async Task SaveRole()
@@ -71,21 +59,20 @@
             // There is no Id, so this is a new Role
             roleList.Add(_role);
             await _roleManager.CreateAsync(_role);
-            Rebind();
+            _role = new AppRole();
+            StateHasChanged();
+
         }
         else
         {
             // Update the existing role
 
             await _roleManager.UpdateAsync(_role);
-            Rebind();
-        }
-    }
+            _role = new AppRole();
 
-    private void Rebind()
-    {
-        rolesListBox.Refresh();
-        _role = new AppRole();
+            StateHasChanged();
+
+        }
     }
 
     private void OnCancelClick()
