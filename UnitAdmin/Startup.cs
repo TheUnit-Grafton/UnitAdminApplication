@@ -91,6 +91,7 @@ namespace UnitAdmin
             // TODO: Replace mock email sender with real implementation
             services.AddSingleton<IEmailSender , MockEmailSender>();
             services.AddScoped<IUserTwoFactorTokenProvider<AppUser> , MockTwoFactorAuthTokenProvider>();
+            services.AddScoped<IUserService , UserService>();
 
             services.AddScoped<IActivityService , ActivityService>();
             services.AddScoped<IAnnouncementService , AnnouncementService>();

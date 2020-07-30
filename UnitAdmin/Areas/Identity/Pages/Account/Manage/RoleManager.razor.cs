@@ -21,8 +21,9 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
 
         protected override async Task OnInitializedAsync()
         {
-            roleList = await Task.Run(() => (_roleManager.Roles.ToList()));
 
+            //roleList = await Task.Run(() => (_roleManager.Roles.ToList()));
+            roleList = _roleManager.Roles.ToList();
         }
 
         private async Task SaveRoleAsync()

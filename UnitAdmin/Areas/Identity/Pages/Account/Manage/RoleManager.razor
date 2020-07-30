@@ -18,7 +18,7 @@
         Add or Edit Role
         <EditForm Model="@_role" OnSubmit="@SaveRoleAsync">
             <div class="form-group">
-                <InputText class="form-control" @bind-Value="@_role.Name" placeholder="Role" />
+                <InputText class="form-control" @bind-Value="@_role.Name" placeholder="Role Name" />
             </div>
             <button type="submit" class="btn btn-success m-3">Save</button>
             <button @onclick="OnCancelClick" class="btn btn-danger m-3">Cancel</button>
