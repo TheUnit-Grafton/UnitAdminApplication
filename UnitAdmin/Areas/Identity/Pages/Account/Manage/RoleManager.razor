@@ -1,11 +1,5 @@
 ﻿@page "/admin/manage/roles"
 
-@using UnitAdmin.Data
-@using UnitAdmin.Models
-@using Microsoft.AspNetCore.Identity
-
-
-@inject UserManager<AppUser> _userManager
  
 <div>
     <h3 class="lab-header-italic">Manage Security Roles</h3>
@@ -22,7 +16,7 @@
     <div class="col-5 m-2">
         @* Add  / Edit Role *@
         Add or Edit Role
-        <EditForm Model="@_role" OnSubmit="@SaveRole">
+        <EditForm Model="@_role" OnSubmit="@SaveRoleAsync">
             <div class="form-group">
                 <InputText class="form-control" @bind-Value="@_role.Name" placeholder="Role" />
             </div>
@@ -31,52 +25,3 @@
         </EditForm>
     </div>
 </div>
-
-@code{
-
-    protected List<AppRole> roleList;
-    private AppRole _role = new AppRole();
-
-    [Inject]
-    private RoleManager<AppRole> _roleManager { get; set; }
-
-    protected override void OnInitialized()
-    {
-        roleList =  _roleManager.Roles.ToList();
-
-    }
-
-
-
-    private async Task SaveRole()
-    {
-
-
-        var findRole = await _roleManager.FindByIdAsync(_role.Id);
-
-        if (findRole == null)
-        {
-            // There is no Id, so this is a new Role
-            roleList.Add(_role);
-            await _roleManager.CreateAsync(_role);
-            _role = new AppRole();
-            StateHasChanged();
-
-        }
-        else
-        {
-            // Update the existing role
-
-            await _roleManager.UpdateAsync(_role);
-            _role = new AppRole();
-
-            StateHasChanged();
-
-        }
-    }
-
-    private void OnCancelClick()
-    {
-        _role = new AppRole();
-    }
-}

@@ -105,12 +105,12 @@ namespace UnitAdmin.Data
 
         public async Task Logout()
         {
-            uriHelper.NavigateTo("Account/Logout", true);
+           await Task.Run(() => uriHelper.NavigateTo("Account/Logout", true));
         }
 
         public async Task<bool> Login(string userName, string password)
         {
-            uriHelper.NavigateTo("Login", true);
+            await Task.Run(() => uriHelper.NavigateTo("Login", true));
 
             return true;
         }
