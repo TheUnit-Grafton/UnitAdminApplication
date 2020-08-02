@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitAdmin", "UnitAdmin\Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLibrary", "DataLibrary\DataLibrary.csproj", "{03039ECC-9068-46AD-85C1-E805A581DE6A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataUtilities", "DataUtilities\DataUtilities.csproj", "{5348B246-CFD2-4719-8E4A-98A5ED7E8FDE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{03039ECC-9068-46AD-85C1-E805A581DE6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03039ECC-9068-46AD-85C1-E805A581DE6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03039ECC-9068-46AD-85C1-E805A581DE6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5348B246-CFD2-4719-8E4A-98A5ED7E8FDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5348B246-CFD2-4719-8E4A-98A5ED7E8FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5348B246-CFD2-4719-8E4A-98A5ED7E8FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5348B246-CFD2-4719-8E4A-98A5ED7E8FDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
