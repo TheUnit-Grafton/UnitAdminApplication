@@ -1,9 +1,6 @@
 ﻿using DataLibrary.Models;
 using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages
@@ -17,7 +14,7 @@ namespace UnitAdmin.Pages
 
         protected async override Task OnInitializedAsync()
         {
-           await Update();
+            await Update();
         }
 
         public void AddActivity()
@@ -37,6 +34,6 @@ namespace UnitAdmin.Pages
             _announcements = await notices.GetAnnouncementsAsync(false); // Only return current announcements to Index page
         }
 
-   
+
     }
 }

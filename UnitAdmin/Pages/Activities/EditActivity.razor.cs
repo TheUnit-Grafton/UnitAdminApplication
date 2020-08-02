@@ -1,9 +1,5 @@
-﻿using DataLibrary.Data;
-using DataLibrary.Models;
+﻿using DataLibrary.Models;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Activities
@@ -14,7 +10,7 @@ namespace UnitAdmin.Pages.Activities
 
         protected async override Task OnParametersSetAsync()
         {
-           activity = await whatsOn.GetActivityAsync(id);
+            activity = await whatsOn.GetActivityAsync(id);
         }
 
         private async Task SaveActivityAsync()

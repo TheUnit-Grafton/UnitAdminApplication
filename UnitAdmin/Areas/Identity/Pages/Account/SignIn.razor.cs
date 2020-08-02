@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using UnitAdmin.Components;
 using UnitAdmin.Models;
@@ -30,7 +27,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
         /// Invoked by <EditForm> when submit button is clicked.
         /// </summary>
         /// <returns></returns>
-        private async Task ValidSubmit()
+        private async Task ValidateUser()
         {
             // Does the username currently exist?
             var user = await _riasp.FindByNameAsync(input.Username);
@@ -48,7 +45,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
             }
 
             var result = await _riasp.PasswordSignInAsync(user.UserName , input.Password , input.RememberMe , false);
-            if (!result.Succeeded)
+            if (result.Succeeded == false)
             {
                 serverSideValidator.AddError(input , nameof(input.Username) , "Sorry, Could not Sign you in");
                 return;

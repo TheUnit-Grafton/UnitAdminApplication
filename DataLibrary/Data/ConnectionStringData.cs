@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DataLibrary.Data
+﻿namespace DataLibrary.Data
 {
     public class ConnectionStringData
     {

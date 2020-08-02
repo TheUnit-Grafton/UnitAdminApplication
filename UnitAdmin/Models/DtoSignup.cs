@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace UnitAdmin.Models
 {
@@ -34,7 +30,7 @@ namespace UnitAdmin.Models
 
         [Required]
         [Display(Name = "Confirm password")]
-        [CompareProperty("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [CompareProperty("Password" , ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]

@@ -7,24 +7,24 @@ namespace UnitAdmin.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Discriminator",
-                table: "AspNetUsers",
+                name: "Discriminator" ,
+                table: "AspNetUsers" ,
                 nullable: false);
 
             migrationBuilder.AddColumn<string>(
-                name: "Discriminator",
-                table: "AspNetRoles",
+                name: "Discriminator" ,
+                table: "AspNetRoles" ,
                 nullable: false);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Discriminator",
+                name: "Discriminator" ,
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "Discriminator",
+                name: "Discriminator" ,
                 table: "AspNetRoles");
         }
     }

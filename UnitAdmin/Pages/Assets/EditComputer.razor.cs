@@ -2,8 +2,6 @@
 using DataLibrary.Models;
 using Microsoft.AspNetCore.Components;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Assets
@@ -11,8 +9,12 @@ namespace UnitAdmin.Pages.Assets
     public partial class EditComputer : ComponentBase
     {
 
-        [Parameter]
-        public int id { get; set; }
+        [Parameter] public int id { get; set; }
+
+        [Inject] IComputerService _context { get; set; }
+
+
+        [Inject] NavigationManager navMan { get; set; }
 
         public ComputerModel model { get; set; }
 
@@ -37,5 +39,7 @@ namespace UnitAdmin.Pages.Assets
             await _context.DeleteComputerAsync(model);
             navMan.NavigateTo("/computers");
         }
+
+       
     }
 }

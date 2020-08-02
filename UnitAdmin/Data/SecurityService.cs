@@ -1,19 +1,13 @@
-using System;
-using System.Web;
-using System.Linq;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Components;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using UnitAdmin.Models;
-using UnitAdmin.Data;
 
 namespace UnitAdmin.Data
 {
@@ -27,13 +21,13 @@ namespace UnitAdmin.Data
         private readonly NavigationManager uriHelper;
         private readonly AuthenticationStateProvider authenticationStateProvider;
 
-        public SecurityService(AuthDbContext context,
+        public SecurityService(AuthDbContext context ,
             //IWebHostEnvironment env,
-            UserManager<AppUser> userManager,
-            RoleManager<AppRole> roleManager,
-            SignInManager<AppUser> signInManager,
-            IHttpContextAccessor httpContextAccessor,
-            NavigationManager uriHelper,
+            UserManager<AppUser> userManager ,
+            RoleManager<AppRole> roleManager ,
+            SignInManager<AppUser> signInManager ,
+            IHttpContextAccessor httpContextAccessor ,
+            NavigationManager uriHelper ,
             AuthenticationStateProvider authenticationStateProvider)
         {
             this.context = context;
@@ -105,12 +99,12 @@ namespace UnitAdmin.Data
 
         public async Task Logout()
         {
-           await Task.Run(() => uriHelper.NavigateTo("Account/Logout", true));
+            await Task.Run(() => uriHelper.NavigateTo("Account/Logout" , true));
         }
 
-        public async Task<bool> Login(string userName, string password)
+        public async Task<bool> Login(string userName , string password)
         {
-            await Task.Run(() => uriHelper.NavigateTo("Login", true));
+            await Task.Run(() => uriHelper.NavigateTo("Login" , true));
 
             return true;
         }
@@ -155,7 +149,7 @@ namespace UnitAdmin.Data
         {
             user.UserName = user.Email;
 
-            var result = await userManager.CreateAsync(user, user.Password);
+            var result = await userManager.CreateAsync(user , user.Password);
 
             EnsureSucceeded(result);
 
@@ -163,7 +157,7 @@ namespace UnitAdmin.Data
 
             if (roles != null && roles.Any())
             {
-                result = await userManager.AddToRolesAsync(user, roles);
+                result = await userManager.AddToRolesAsync(user , roles);
                 EnsureSucceeded(result);
             }
 
@@ -196,17 +190,17 @@ namespace UnitAdmin.Data
             return await Task.FromResult(user);
         }
 
-        public async Task<AppUser> UpdateUser(string id, AppUser user)
+        public async Task<AppUser> UpdateUser(string id , AppUser user)
         {
             var roles = user.RoleNames.ToArray();
 
-            var result = await userManager.RemoveFromRolesAsync(user, await userManager.GetRolesAsync(user));
+            var result = await userManager.RemoveFromRolesAsync(user , await userManager.GetRolesAsync(user));
 
             EnsureSucceeded(result);
 
             if (roles.Any())
             {
-                result = await userManager.AddToRolesAsync(user, roles);
+                result = await userManager.AddToRolesAsync(user , roles);
 
                 EnsureSucceeded(result);
             }
@@ -221,7 +215,7 @@ namespace UnitAdmin.Data
 
                 EnsureSucceeded(result);
 
-                result = await userManager.AddPasswordAsync(user, user.Password);
+                result = await userManager.AddPasswordAsync(user , user.Password);
 
                 EnsureSucceeded(result);
             }
@@ -233,7 +227,7 @@ namespace UnitAdmin.Data
         {
             if (!result.Succeeded)
             {
-                var message = string.Join(", ", result.Errors.Select(error => error.Description));
+                var message = string.Join(", " , result.Errors.Select(error => error.Description));
 
                 throw new ApplicationException(message);
             }

@@ -1,0 +1,14 @@
+﻿@page "/admin/manage/user/{userId}"
+
+@using UnitAdmin.Areas.Identity.Pages.Shared
+
+
+<h3 class="lab-header-italic">Edit User </h3>
+@if (userModel != null)
+{
+<div>
+    <UserControl Model="@userModel" ButtonText="Update" ValidSubmit="@UpdateUser" OnCancelClick="@CancelClicked"></UserControl>
+</div>
+}
+
+

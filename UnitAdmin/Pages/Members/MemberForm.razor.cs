@@ -2,7 +2,6 @@
 using Syncfusion.Blazor.Inputs;
 using System;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace UnitAdmin.Pages.Members
 {
@@ -12,11 +11,11 @@ namespace UnitAdmin.Pages.Members
         {
             if (string.IsNullOrWhiteSpace(model.PhotoPath))
             {
-               
+
             }
             else
             {
-               
+
             }
         }
 

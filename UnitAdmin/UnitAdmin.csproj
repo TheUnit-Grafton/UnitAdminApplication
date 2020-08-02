@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataLibrary\DataLibrary.csproj" />
+    <ProjectReference Include="..\DataUtilities\DataUtilities.csproj" />
   </ItemGroup>
 
 </Project>

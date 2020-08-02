@@ -52,9 +52,9 @@ namespace UnitAdmin
              {
                  options.SignIn.RequireConfirmedAccount = true;
                  options.User.RequireUniqueEmail = true;
-                 
+
                  options.SignIn.RequireConfirmedEmail = false;
-                 
+
              })
                 .AddUserManager<UserManager<AppUser>>()
                 .AddRoles<AppRole>()
@@ -62,7 +62,7 @@ namespace UnitAdmin
 
             // Required for the SyncFusion File Upload control to function
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
 

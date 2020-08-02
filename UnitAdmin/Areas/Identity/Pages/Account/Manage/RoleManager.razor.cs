@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnitAdmin.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
 {
@@ -36,7 +35,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
                 roleList.Add(_role);
                 await _roleManager.CreateAsync(_role);
                 _role = new AppRole();
-               // StateHasChanged();
+                // StateHasChanged();
 
             }
             else
@@ -46,7 +45,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
                 await _roleManager.UpdateAsync(_role);
                 _role = new AppRole();
 
-               // StateHasChanged();
+                // StateHasChanged();
 
             }
         }

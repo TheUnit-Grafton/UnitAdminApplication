@@ -1,41 +1,65 @@
-﻿@using UnitAdmin.Models
-@inject RevalidatingIdentityAuthenticationStateProvider<AppUser> _riasp
+﻿<h3 class="lab-header-italic text-center">Add or Edit User</h3>
 
-<h3 class="lab-header-italic text-center">Add or Edit User</h3>
-
-<EditForm Model="@userModel" OnValidSubmit="@validSubmit">
+<EditForm Model="@Model" OnValidSubmit="@ValidSubmit">
     <DataAnnotationsValidator />
     <div class="row">
+            <h4>Username: @Model.UserName</h4>
+        </div>>
+    <div class="row">
+        @* Row for Name *@
         <div class="form-group">
             <label class="control-label">Firstname:</label>
-            <InputText class="form-control" @bind-Value="@userModel.FirstName" placeholder="First Name" />
-            <ValidationMessage For="@(() => userModel.FirstName)" />
+            <InputText class="form-control" @bind-Value="@Model.FirstName" placeholder="First Name" />
+            <ValidationMessage For="@(() => Model.FirstName)" />
         </div>
         <div class="form-group">
             <label class="control-label">Surname:</label>
-            <InputText class="form-control" @bind-Value="@userModel.LastName" placeholder="Surname" />
-            <ValidationMessage For="@(() => userModel.LastName)" />
+            <InputText class="form-control" @bind-Value="@Model.LastName" placeholder="Surname" />
+            <ValidationMessage For="@(() => Model.LastName)" />
         </div>
     </div>
     <div class="row">
+        @* Row for Contact Details *@
         <div class="form-group">
             <label class="control-label">Email:</label>
-            <InputText class="form-control" @bind-Value="@userModel.Email" placeholder="Email Address" />
-            <ValidationMessage For="@(() => userModel.Email)" />
+            <InputText class="form-control" @bind-Value="@Model.Email" placeholder="Email Address" />
+            <ValidationMessage For="@(() => Model.Email)" />
         </div>
         <div class="form-group">
             <label class="control-label">Phone:</label>
-            <InputText class="form-control" @bind-Value="@userModel.PhoneNumber" placeholder="Phone Number" />
-            <ValidationMessage For="@(() => userModel.PhoneNumber)" />
+            <InputText class="form-control" @bind-Value="@Model.PhoneNumber" placeholder="Phone Number" />
+            <ValidationMessage For="@(() => Model.PhoneNumber)" />
+        </div>
+        <div class="row">
+            @* Assign Roles to user section *@
+            <div class="form-group">
+                <div class="col-5">
+                    <label class="control-label">Member of Roles</label><br>
+                    <DxListBox Data="@Model.RoleNames">
+
+                    </DxListBox>
+                </div>
+                <div class="col-1">
+                    @* Column for buttons to add or remove roles from a user *@
+                    <button type="button" id="addRole" class="btn btn-block">
+                        <span class="oi oi-arrow-left"></span>Add Role
+                    </button>
+                    <p></p>
+                    <button type="button" id="removeRole" class="btn btn-block">
+                        <span class="oi oi-arrow-right"></span>Remove Role
+                    </button>
+                </div>
+                <div class="col-5">
+                    <label class="control-label">Available Roles</label><br>
+                    <DxListBox Data="@roleList">
+
+                    </DxListBox>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="row">
+        <button type="submit" class="btn btn-success m-3">@ButtonText</button>
+        <button @onclick="OnCancelClick" class="btn btn-danger m-3">Cancel</button>
+    </div>
 </EditForm>
-
-@code{
-    [Parameter] public AppUser userModel { get; set; }
-    [Parameter] public string userButtonText { get; set; } = "Save";
-
-    [Parameter] public EventCallback validSubmit { get; set; }
-    [CascadingParameter] public Task<AuthenticationState> AuthenticationStateTask { get; set; }
-
-}

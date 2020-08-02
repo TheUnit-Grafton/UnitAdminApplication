@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Logging;
-using Microsoft.JSInterop;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using UnitAdmin.Components;
 using UnitAdmin.Models;
 
@@ -58,10 +52,11 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
         private async Task ValidSubmit()
         {
             var result = await SignUpUser();
-            if (!result) return;
+            if (!result)
+                return;
             showSignUp = false;
 
-            EmailConfirmationUrl = await _riasp.GetUrl(IdentityUser , IdentityUser.Id, navman.BaseUri, "SignUpEmailConfirmed");
+            EmailConfirmationUrl = await _riasp.GetUrl(IdentityUser , IdentityUser.Id , navman.BaseUri , "SignUpEmailConfirmed");
             showConfirmation = true;
             StateHasChanged();
             navman.NavigateTo("/");
@@ -82,7 +77,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
                 var user = await _riasp.FindByNameAsync(input.UserName);
                 if (user != null)
                 { //Already exists
-                    serverSideValidator.AddError(input, nameof(input.UserName), "Sorry, try another username");
+                    serverSideValidator.AddError(input , nameof(input.UserName) , "Sorry, try another username");
                     return false;
                 }
 
@@ -96,10 +91,10 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
                 IdentityUser.Password = input.Password;
 
                 // Actually writing the user details to database
-                var result = await _riasp.CreateAsync(IdentityUser, input.Password);
+                var result = await _riasp.CreateAsync(IdentityUser , input.Password);
                 if (!result.Succeeded)
                 {
-                    serverSideValidator.AddError(input, result);
+                    serverSideValidator.AddError(input , result);
                     return false;
                 }
 
@@ -110,7 +105,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account
             }
             catch (Exception ex)
             {
-                _logger.LogError("Internal Error {message}", ex.Message);
+                _logger.LogError("Internal Error {message}" , ex.Message);
                 throw ex;
             }
         }
