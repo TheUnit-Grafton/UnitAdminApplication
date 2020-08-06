@@ -35,19 +35,18 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
                 roleList.Add(_role);
                 await _roleManager.CreateAsync(_role);
                 _role = new AppRole();
-                // StateHasChanged();
+                
+               
 
             }
             else
             {
                 // Update the existing role
-
                 await _roleManager.UpdateAsync(_role);
                 _role = new AppRole();
 
-                // StateHasChanged();
-
             }
+            await InvokeAsync(StateHasChanged);
         }
 
         private void OnCancelClick()

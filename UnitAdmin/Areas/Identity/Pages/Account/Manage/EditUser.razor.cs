@@ -10,7 +10,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
     {
         [CascadingParameter] public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
-        [Parameter] public string userId { get; set; } = "";
+        [Parameter] public string name { get; set; } = "";
 
         [Inject] NavigationManager _nav { get; set; }
         [Inject] SecurityService _security { get; set; }
@@ -21,12 +21,12 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
 
         protected override async Task OnParametersSetAsync()
         {
-            userModel = await _riasp.FindByIdAsync(userId);
+            userModel = await _riasp.FindByNameAsync(name);
         }
 
         public async Task UpdateUser()
         {
-            userModel = await _security.UpdateUser(userId, userModel);
+            userModel = await _security.UpdateUser(userModel.Id, userModel);
             _nav.NavigateTo("admin/manage/users");
         }
 

@@ -1,65 +1,140 @@
-﻿<h3 class="lab-header-italic text-center">Add or Edit User</h3>
+﻿@using Syncfusion.Blazor.DropDowns
 
 <EditForm Model="@Model" OnValidSubmit="@ValidSubmit">
     <DataAnnotationsValidator />
     <div class="row">
             <h4>Username: @Model.UserName</h4>
-        </div>>
-    <div class="row">
-        @* Row for Name *@
-        <div class="form-group">
-            <label class="control-label">Firstname:</label>
-            <InputText class="form-control" @bind-Value="@Model.FirstName" placeholder="First Name" />
-            <ValidationMessage For="@(() => Model.FirstName)" />
         </div>
-        <div class="form-group">
-            <label class="control-label">Surname:</label>
-            <InputText class="form-control" @bind-Value="@Model.LastName" placeholder="Surname" />
-            <ValidationMessage For="@(() => Model.LastName)" />
-        </div>
-    </div>
-    <div class="row">
-        @* Row for Contact Details *@
-        <div class="form-group">
-            <label class="control-label">Email:</label>
-            <InputText class="form-control" @bind-Value="@Model.Email" placeholder="Email Address" />
-            <ValidationMessage For="@(() => Model.Email)" />
-        </div>
-        <div class="form-group">
-            <label class="control-label">Phone:</label>
-            <InputText class="form-control" @bind-Value="@Model.PhoneNumber" placeholder="Phone Number" />
-            <ValidationMessage For="@(() => Model.PhoneNumber)" />
+    <div class="float-left col-4">
+        <div class="row">
+            @* Row for Name *@
+            <div class="form-group m-2 p-2">
+                <label class="control-label">Firstname:</label>
+                <InputText class="form-control" @bind-Value="@Model.FirstName" placeholder="First Name" />
+                <ValidationMessage For="@(() => Model.FirstName)" />
+            </div>
+            <div class="form-group m-2 p-2">
+                <label class="control-label">Surname:</label>
+                <InputText class="form-control" @bind-Value="@Model.LastName" placeholder="Surname" />
+                <ValidationMessage For="@(() => Model.LastName)" />
+            </div>
         </div>
         <div class="row">
-            @* Assign Roles to user section *@
-            <div class="form-group">
-                <div class="col-5">
-                    <label class="control-label">Member of Roles</label><br>
-                    <DxListBox Data="@Model.RoleNames">
+            @* Row for Contact Details *@
+            <div class="form-group m-2 p-2">
+                <label class="control-label">Email:</label>
+                <InputText class="form-control" @bind-Value="@Model.Email" placeholder="Email Address" />
+                <ValidationMessage For="@(() => Model.Email)" />
+            </div>
+            <div class="form-group m-2 p-2">
+                <label class="control-label">Phone:</label>
+                <InputText class="form-control" @bind-Value="@Model.PhoneNumber" placeholder="Phone Number" />
+                <ValidationMessage For="@(() => Model.PhoneNumber)" />
+            </div>
+        </div>
+    </div>
+    <div class="float-right col-8">
+        @*<div class="row">
+            @* Assign Roles to user section
 
-                    </DxListBox>
-                </div>
-                <div class="col-1">
-                    @* Column for buttons to add or remove roles from a user *@
-                    <button type="button" id="addRole" class="btn btn-block">
-                        <span class="oi oi-arrow-left"></span>Add Role
-                    </button>
-                    <p></p>
-                    <button type="button" id="removeRole" class="btn btn-block">
-                        <span class="oi oi-arrow-right"></span>Remove Role
-                    </button>
-                </div>
-                <div class="col-5">
-                    <label class="control-label">Available Roles</label><br>
-                    <DxListBox Data="@roleList">
+            <div class="col-3">
+                <label class="control-label">Member of Roles</label><br>
+                @*<DxListBox Data="@Model.RoleNames"
+                            @bind-SelectedItems="@SelectedMemberRoles" CssClass="mw-1100">
 
-                    </DxListBox>
+                </DxListBox>
+            </div>
+            <div class="col-3">
+                @* Column for buttons to add or remove roles from a user
+                <button type="button" id="addRole" class="btn btn-outline-primary">
+                    <span class="oi oi-arrow-left m-2"></span>Add Role
+                </button>
+                <p></p>
+                <button type="button" id="removeRole" class="btn btn-outline-primary">
+                    <span class="oi oi-arrow-right m-2"></span>Remove Role
+                </button>
+            </div>
+            <div class="col-3">
+                <label class="control-label">Available Roles</label><br>
+                @*<DxListBox Data="@roleList">
+
+                </DxListBox>
+            </div>
+        </div> *@
+
+        <div id="listbox-control">
+            <div class="dual-list-wrapper">
+                <div class="dual-list-groupa">
+                    <h4> Current Roles</h4>
+                    <SfListBox ID="currentRoles" Scope="#availableRoles2" DataSource="@CurrentRoles" TItem="string" Height="330px" TValue="string[]">
+                        @*<ListBoxFieldSettings Text="Name"></ListBoxFieldSettings>*@
+                        <ListBoxToolbarSettings Items="@Items"></ListBoxToolbarSettings>
+                    </SfListBox>
+                </div>
+                <div class="dual-list-groupb">
+                    <h4>Available Roles</h4>
+                    <SfListBox ID="availableRoles" DataSource="@AvailableRoles" Height="330px" TItem="string" TValue="string[]">
+                        @*<ListBoxFieldSettings Text="Name"></ListBoxFieldSettings>*@
+                    </SfListBox>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row col-12">
         <button type="submit" class="btn btn-success m-3">@ButtonText</button>
-        <button @onclick="OnCancelClick" class="btn btn-danger m-3">Cancel</button>
+        <button @onclick="@OnCancelClick" class="btn btn-danger m-3">Cancel</button>
     </div>
 </EditForm>
+
+<style>
+    .control-section .dual-list-wrapper {
+        width: 95%;
+        margin: 0 auto 10px;
+        display: flex;
+    }
+
+    .dual-list-groupa,
+    .dual-list-groupb {
+        width: 50%;
+    }
+
+        .dual-list-groupb .e-listbox-wrapper,
+        .dual-list-groupb h4 {
+            width: 47%;
+            margin-left: 15px;
+        }
+
+    @@media screen and (max-width: 590px) {
+        .control-section .dual-list-wrapper {
+            width: 100%;
+        }
+
+        .dual-list-groupa {
+            width: 40%;
+        }
+
+        .dual-list-groupb {
+            width: 40%;
+        }
+    }
+
+    @@media screen and (max-width: 400px) {
+        .dual-list-groupa {
+            width: 40%;
+        }
+
+        .dual-list-groupb {
+            width: 40%;
+        }
+    }
+
+    #listbox-control {
+        margin: auto;
+    }
+
+    @@media screen and (max-width: 590px) {
+        #listbox-control {
+            width: 100%;
+        }
+    }
+</style>

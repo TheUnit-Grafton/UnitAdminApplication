@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnitAdmin.Models;
 
@@ -9,8 +10,12 @@ namespace UnitAdmin.Areas.Identity.Pages.Shared
 {
     public partial class UserControl : ComponentBase
     {
+        //private IEnumerable<AppUser> _SelectedMemberRoles;
+        public string[] Items = new string[] { "moveTo" , "moveFrom" , "moveAllTo" , "moveAllFrom" };
+
         [Parameter]
-        public AppUser Model { get; set; } //= new AppUser();
+        public string userId { get; set; }
+        public AppUser Model { get; set; }
 
         [Parameter]
         public string ButtonText { get; set; } = "Save";
@@ -23,33 +28,12 @@ namespace UnitAdmin.Areas.Identity.Pages.Shared
 
         [CascadingParameter] public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
-        //[Inject] RevalidatingIdentityAuthenticationStateProvider<AppUser> _riasp { get; set; }
-        //[Inject] SecurityService _security { get; set; }
-
         [Inject] RoleManager<AppRole> _roleManager { get; set; }
         [Inject] UserManager<AppUser> _userManager { get; set; }
 
-        protected List<AppRole> roleList { get; set; }
+        public IEnumerable<string> CurrentRoles;
+        public IEnumerable<string> AvailableRoles;
 
-
-        protected override async Task OnParametersSetAsync()
-        {
-
-            //TODO: Populate list of roles available
-            //roleList = _roleManager.Roles.ToList();
-
-            //if (userModel.RoleNames.Count() > 0)
-            //{
-            //    foreach (var role in userModel.RoleNames)
-            //    {
-            //        if (await IsInRole(role))
-            //        {
-            //            await roleList.Remove(userModel.Roles.);
-            //        }
-            //    }
-            //}
-
-        }
-
+        
     }
 }
