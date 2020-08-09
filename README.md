@@ -3,7 +3,7 @@
 # Technology Club Management Software
 Blazor Server web app to assist in the management of The UNIT Technology Club for autistic teens.
 
-The UNIT is a technology club based in the Clarence Valley of NSW, and uses technology and games to help high functioning autistic kids learn communications skills valuable for their future success.
+The UNIT is a Not-For-Profit technology club based in the Clarence Valley of NSW, and uses technology and games to help high functioning autistic kids learn communications skills valuable for their future success.
 
 The aim of this software is to provide a centralised place for administrative functions.
 
