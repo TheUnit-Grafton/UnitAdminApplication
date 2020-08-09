@@ -1,80 +1,56 @@
 ﻿@using Syncfusion.Blazor.DropDowns
+@using UnitAdmin.Models
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Identity
 
 <EditForm Model="@Model" OnValidSubmit="@ValidSubmit">
     <DataAnnotationsValidator />
     <div class="row">
-            <h4>Username: @Model.UserName</h4>
-        </div>
-    <div class="float-left col-4">
+        <h4>Username: @Model.UserName</h4>
+    </div>
+    <div class="row col-12">
         <div class="row">
-            @* Row for Name *@
-            <div class="form-group m-2 p-2">
+            <div class="form-group m-2 p-1">
                 <label class="control-label">Firstname:</label>
-                <InputText class="form-control" @bind-Value="@Model.FirstName" placeholder="First Name" />
+                <InputText class="form-control m-2 p-1" @bind-Value="@Model.FirstName" placeholder="First Name" />
                 <ValidationMessage For="@(() => Model.FirstName)" />
             </div>
-            <div class="form-group m-2 p-2">
+            <div class="form-group m-2 p-1">
                 <label class="control-label">Surname:</label>
-                <InputText class="form-control" @bind-Value="@Model.LastName" placeholder="Surname" />
+                <InputText class="form-control m-2 p-1" @bind-Value="@Model.LastName" placeholder="Surname" />
                 <ValidationMessage For="@(() => Model.LastName)" />
             </div>
-        </div>
-        <div class="row">
-            @* Row for Contact Details *@
-            <div class="form-group m-2 p-2">
+            <div class="form-group m-2 p-1">
                 <label class="control-label">Email:</label>
-                <InputText class="form-control" @bind-Value="@Model.Email" placeholder="Email Address" />
+                <InputText class="form-control m-2 p-1" @bind-Value="@Model.Email" placeholder="Email Address" />
                 <ValidationMessage For="@(() => Model.Email)" />
             </div>
-            <div class="form-group m-2 p-2">
+            <div class="form-group m-2 p-1">
                 <label class="control-label">Phone:</label>
-                <InputText class="form-control" @bind-Value="@Model.PhoneNumber" placeholder="Phone Number" />
+                <InputText class="form-control m-2 p-1" @bind-Value="@Model.PhoneNumber" placeholder="Phone Number" />
                 <ValidationMessage For="@(() => Model.PhoneNumber)" />
+            </div>
+            <div class="form-group m-2 p-1">
+                <label class="control-label">Position:</label>
+                <InputText class="form-control m-2 p-1" @bind-Value="@Model.Position" placeholder="Position" />
+                <ValidationMessage For="@(() => Model.Position)" />
             </div>
         </div>
     </div>
-    <div class="float-right col-8">
-        @*<div class="row">
-            @* Assign Roles to user section
-
-            <div class="col-3">
-                <label class="control-label">Member of Roles</label><br>
-                @*<DxListBox Data="@Model.RoleNames"
-                            @bind-SelectedItems="@SelectedMemberRoles" CssClass="mw-1100">
-
-                </DxListBox>
-            </div>
-            <div class="col-3">
-                @* Column for buttons to add or remove roles from a user
-                <button type="button" id="addRole" class="btn btn-outline-primary">
-                    <span class="oi oi-arrow-left m-2"></span>Add Role
-                </button>
-                <p></p>
-                <button type="button" id="removeRole" class="btn btn-outline-primary">
-                    <span class="oi oi-arrow-right m-2"></span>Remove Role
-                </button>
-            </div>
-            <div class="col-3">
-                <label class="control-label">Available Roles</label><br>
-                @*<DxListBox Data="@roleList">
-
-                </DxListBox>
-            </div>
-        </div> *@
-
+    <div >
         <div id="listbox-control">
             <div class="dual-list-wrapper">
                 <div class="dual-list-groupa">
                     <h4> Current Roles</h4>
-                    <SfListBox ID="currentRoles" Scope="#availableRoles2" DataSource="@CurrentRoles" TItem="string" Height="330px" TValue="string[]">
-                        @*<ListBoxFieldSettings Text="Name"></ListBoxFieldSettings>*@
+                    <SfListBox @ref="currentRoles" Scope="#availableRoles2" DataSource="@Model.RoleNames" TItem="string" Height="330px" TValue="string[]">
                         <ListBoxToolbarSettings Items="@Items"></ListBoxToolbarSettings>
                     </SfListBox>
                 </div>
                 <div class="dual-list-groupb">
                     <h4>Available Roles</h4>
-                    <SfListBox ID="availableRoles" DataSource="@AvailableRoles" Height="330px" TItem="string" TValue="string[]">
-                        @*<ListBoxFieldSettings Text="Name"></ListBoxFieldSettings>*@
+                    <SfListBox @ref="availableRoles" DataSource="@AvailableRoles" Height="330px" TItem="string" TValue="string[]">
+                        <ListBoxFieldSettings Text="Name"></ListBoxFieldSettings>
                     </SfListBox>
                 </div>
             </div>
@@ -87,6 +63,18 @@
 </EditForm>
 
 <style>
+    .dual-list-groupa {
+        width: 48%;
+        float: left;
+    }
+
+    .dual-list-groupb {
+        width: 48%;
+        float: right;
+    }
+</style>
+
+@*<style>
     .control-section .dual-list-wrapper {
         width: 95%;
         margin: 0 auto 10px;
@@ -95,13 +83,13 @@
 
     .dual-list-groupa,
     .dual-list-groupb {
-        width: 50%;
+        width: 40%;
     }
 
         .dual-list-groupb .e-listbox-wrapper,
         .dual-list-groupb h4 {
-            width: 47%;
-            margin-left: 15px;
+            width: 40%;
+            margin-left: 10px;
         }
 
     @@media screen and (max-width: 590px) {
@@ -110,11 +98,11 @@
         }
 
         .dual-list-groupa {
-            width: 40%;
+            width: 45%;
         }
 
         .dual-list-groupb {
-            width: 40%;
+            width: 45%;
         }
     }
 
@@ -137,4 +125,22 @@
             width: 100%;
         }
     }
-</style>
+</style>*@
+
+@code{
+    [CascadingParameter] public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback ValidSubmit { get; set; }
+    [Parameter] public EventCallback OnCancelClick { get; set; }
+    [Parameter] public string[] AvailableRoles { get; set; }
+
+
+
+    [Parameter] public AppUser Model { get; set; }
+
+    private string[] Items = new string[] { "moveTo" , "moveFrom" , "moveAllTo" , "moveAllFrom" };
+
+    SfListBox<string[] , AppRole> CurrentRoles;
+
+
+}

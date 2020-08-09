@@ -18,7 +18,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
         }
         public void EditUser(RecordDoubleClickEventArgs<AppUser> doubleClickArgs)
         {
-            navMan.NavigateTo($"/admin/manage/user/{doubleClickArgs.RowData.UserName}");
+            navMan.NavigateTo($"/admin/manage/user/{doubleClickArgs.RowData.Id}");
         }
 
         public void AddUser()
