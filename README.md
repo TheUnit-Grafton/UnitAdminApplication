@@ -13,7 +13,7 @@ Current and planned features of this software:
    - [x] Display / Edit list of currently available activities
    - [x] Add individual notices to appear on the main page
    - [x] List and edit existing announcements/notices
-   - [ ] Individual user logins
+   - [x] Individual user logins
    - [ ] Record member details
    - [ ] Record member attendance
    - [ ] Record and manage member behaviour
