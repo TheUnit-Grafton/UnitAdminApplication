@@ -10,7 +10,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
 {
     public partial class RoleManager : ComponentBase
     {
-        protected IEnumerable<AppRole> roleList;
+        protected List<AppRole> roleList;
         private AppRole _role = new AppRole();
 
         [Inject]
@@ -20,7 +20,9 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
         {
 
             //roleList = await Task.Run(() => (_roleManager.Roles.ToList()));
-            roleList = await _security.GetRoles();
+            var roles = await _security.GetRoles();
+
+            roleList = roles.ToList();
         }
 
         private async Task SaveRoleAsync()
@@ -30,9 +32,10 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
             //if (findRole == null)
             //{
             //    // There is no Id, so this is a new Role
-            //    roleList.Add(_role);
-            //    await _roleManager.CreateAsync(_role);
-            //    _role = new AppRole();
+
+            roleList.Add(_role); // Add the new role to the list
+            await _security.CreateRole(_role); // Use the security service to add the new Role to the database
+            _role = new AppRole();
             //}
             //else
             //{
@@ -41,7 +44,9 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
             //    _role = new AppRole();
 
             //}
-            await InvokeAsync(StateHasChanged);
+            // await InvokeAsync(StateHasChanged);
+
+            await OnInitializedAsync(); //Refresh the data on the screen
         }
 
         private void OnCancelClick()
