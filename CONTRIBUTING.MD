@@ -5,6 +5,8 @@ email, or any other method with the owners of this repository before making a ch
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
+> *__We are actively seeking assistance improving our UX. If you can help with the HTML/CSS and ASP.NET please create an issue or send a message to the maintainers of this repo.__*
+
 ## Pull Request Process
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
