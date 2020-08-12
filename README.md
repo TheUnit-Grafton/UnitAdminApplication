@@ -1,5 +1,7 @@
 ![The Unit Clarence Valley](Images/TheUnitLogo.jpg)
 
+>**_Help wanted with HTML/CSS and ASP.NET User Interface. See CONTRIBUTING.MD for details_**
+
 # Technology Club Management Software
 Blazor Server web app to assist in the management of The UNIT Technology Club for autistic teens.
 
