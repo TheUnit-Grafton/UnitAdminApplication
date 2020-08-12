@@ -140,9 +140,9 @@ namespace UnitAdmin.Data
             return await Task.FromResult(context.Roles.Find(id));
         }
 
-        public async Task<IEnumerable<IdentityUser>> GetUsers()
+        public async Task<IEnumerable<AppUser>> GetUsers()
         {
-            return await Task.FromResult(context.Users);
+            return await Task.FromResult(userManager.Users);
         }
 
         public async Task<AppUser> CreateUser(AppUser user)

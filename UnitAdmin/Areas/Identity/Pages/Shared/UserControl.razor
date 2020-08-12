@@ -43,13 +43,13 @@
             <div class="dual-list-wrapper">
                 <div class="dual-list-groupa">
                     <h4> Current Roles</h4>
-                    <SfListBox @ref="currentRoles" Scope="#availableRoles2" DataSource="@Model.RoleNames" TItem="string" Height="330px" TValue="string[]">
+                    <SfListBox Scope="#availableRoles2" DataSource="@Model.RoleNames" TItem="string" Height="330px" TValue="string[]">
                         <ListBoxToolbarSettings Items="@Items"></ListBoxToolbarSettings>
                     </SfListBox>
                 </div>
                 <div class="dual-list-groupb">
                     <h4>Available Roles</h4>
-                    <SfListBox @ref="availableRoles" DataSource="@AvailableRoles" Height="330px" TItem="string" TValue="string[]">
+                    <SfListBox DataSource="@AvailableRoles" Height="330px" TItem="string" TValue="string[]">
                         <ListBoxFieldSettings Text="Name"></ListBoxFieldSettings>
                     </SfListBox>
                 </div>
@@ -140,7 +140,7 @@
 
     private string[] Items = new string[] { "moveTo" , "moveFrom" , "moveAllTo" , "moveAllFrom" };
 
-    SfListBox<string[] , AppRole> CurrentRoles;
+    //SfListBox<string[] , AppRole> CurrentRoles;
 
 
 }

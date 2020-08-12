@@ -8,13 +8,13 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
 {
     public partial class UserList : ComponentBase
     {
-        [Inject] IUserService _users { get; set; }
+        [Inject] SecurityService _security { get; set; }
         [Inject] NavigationManager navMan { get; set; }
 
-        protected List<AppUser> users;
+        protected IEnumerable<AppUser> users;
         protected override void OnInitialized()
         {
-            users = _users.GetAllUsers();
+            users = (IEnumerable<AppUser>)_security.GetUsers();
         }
         public void EditUser(RecordDoubleClickEventArgs<AppUser> doubleClickArgs)
         {
