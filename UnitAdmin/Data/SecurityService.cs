@@ -142,12 +142,13 @@ namespace UnitAdmin.Data
 
         public async Task<IEnumerable<AppUser>> GetUsers()
         {
-            return await Task.FromResult(userManager.Users);
+            var userlist = await Task.FromResult(userManager.Users);
+            return userlist.AsEnumerable<AppUser>().ToList<AppUser>();
         }
 
         public async Task<AppUser> CreateUser(AppUser user)
         {
-            user.UserName = user.Email;
+           // user.UserName = user.Email;
 
             var result = await userManager.CreateAsync(user , user.Password);
 
