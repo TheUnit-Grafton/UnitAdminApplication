@@ -21,6 +21,11 @@ namespace UnitAdmin.Pages
         {
             navMan.NavigateTo("/Activity/Add");
         }
+        
+        public void EditActivity(int id)
+        {
+
+        }
 
         public async Task ToggleCurrentActivities()
         {

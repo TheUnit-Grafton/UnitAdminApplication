@@ -6,11 +6,13 @@ namespace UnitAdmin.Pages.Activities
 {
     public partial class EditActivity : ComponentBase
     {
-        private ActivityModel activity { get; set; }
+        private ActivityModel activity { get; set; } = new ActivityModel();
 
         protected async override Task OnParametersSetAsync()
         {
-            activity = await whatsOn.GetActivityAsync(id);
+            activity.Id = id;
+
+            activity = await whatsOn.GetActivityAsync(activity.Id);
         }
 
         private async Task SaveActivityAsync()
