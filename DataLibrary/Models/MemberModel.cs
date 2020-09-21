@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using static DataLibrary.Extensions.Enums;
 
 namespace DataLibrary.Models
@@ -16,7 +15,7 @@ namespace DataLibrary.Models
 
         public MemberModel()
         {
-            
+
         }
 
         public int Id { get; set; }

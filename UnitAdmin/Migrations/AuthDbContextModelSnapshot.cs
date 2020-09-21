@@ -14,7 +14,7 @@ namespace UnitAdmin.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.5")
+                .HasAnnotation("ProductVersion", "3.1.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -55,6 +55,9 @@ namespace UnitAdmin.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("AppRoleId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
                     b.Property<string>("ClaimType")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -66,6 +69,8 @@ namespace UnitAdmin.Migrations
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppRoleId");
 
                     b.HasIndex("RoleId");
 
@@ -148,6 +153,9 @@ namespace UnitAdmin.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
                     b.Property<string>("ClaimType")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -159,6 +167,8 @@ namespace UnitAdmin.Migrations
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("UserId");
 
@@ -195,7 +205,12 @@ namespace UnitAdmin.Migrations
                     b.Property<string>("RoleId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
                     b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("RoleId");
 
@@ -238,11 +253,18 @@ namespace UnitAdmin.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("Position")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.HasDiscriminator().HasValue("AppUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
+                    b.HasOne("UnitAdmin.Models.AppRole", null)
+                        .WithMany("Claims")
+                        .HasForeignKey("AppRoleId");
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -252,6 +274,10 @@ namespace UnitAdmin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
+                    b.HasOne("UnitAdmin.Models.AppUser", null)
+                        .WithMany("Claims")
+                        .HasForeignKey("AppUserId");
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -270,6 +296,10 @@ namespace UnitAdmin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
+                    b.HasOne("UnitAdmin.Models.AppUser", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("AppUserId");
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")

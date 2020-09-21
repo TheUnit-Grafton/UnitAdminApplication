@@ -1,0 +1,27 @@
+﻿@page "/admin/manage/roles"
+
+ 
+<div>
+    <h3 class="lab-header-italic">Manage Security Roles</h3>
+    <hr />
+</div>
+<div class="row">
+    <div class="col-5 m-2">
+        @*List of current roles*@
+        Roles currently defined:
+        <DxListBox Data="@roleList">
+
+        </DxListBox>
+    </div>
+    <div class="col-5 m-2">
+        @* Add  / Edit Role *@
+        Add or Edit Role
+        <EditForm Model="@_role" OnSubmit="@SaveRoleAsync">
+            <div class="form-group">
+                <InputText class="form-control" @bind-Value="@_role.Name" placeholder="Role Name" />
+            </div>
+            <button type="submit" class="btn btn-success m-3">Save</button>
+            <button @onclick="OnCancelClick" class="btn btn-danger m-3">Cancel</button>
+        </EditForm>
+    </div>
+</div>

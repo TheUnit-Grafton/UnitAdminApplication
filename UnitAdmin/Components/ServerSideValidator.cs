@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace UnitAdmin.Components
 {
-      /// <summary>
-      /// General purpose EditForm validator.
-      /// This will display error messages when the form elements have error, and can also be used after a ValidSubmit() 
-      /// to post messages about the form.  For example, during SignIn if the UserName is not found, this can post a message.
-      /// </summary>
+    /// <summary>
+    /// General purpose EditForm validator.
+    /// This will display error messages when the form elements have error, and can also be used after a ValidSubmit() 
+    /// to post messages about the form.  For example, during SignIn if the UserName is not found, this can post a message.
+    /// </summary>
     public class ServerSideValidator : ComponentBase, IComponent
     {
         private ValidationMessageStore _messageStore;

@@ -321,6 +321,10 @@ namespace UnitAdmin.Areas.Identity
 
         public async Task<string> GetUrl(TUser user , string id , string baseuri , string path)
         {
+
+            // Default code commented out to resolve error with TFA on user registration.
+            //return null;
+
             var scope = _scopeFactory.CreateScope();
             try
             {

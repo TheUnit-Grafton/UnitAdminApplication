@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -52,9 +53,9 @@ namespace UnitAdmin
              {
                  options.SignIn.RequireConfirmedAccount = true;
                  options.User.RequireUniqueEmail = true;
-                 
+
                  options.SignIn.RequireConfirmedEmail = false;
-                 
+
              })
                 .AddUserManager<UserManager<AppUser>>()
                 .AddRoles<AppRole>()
@@ -62,7 +63,7 @@ namespace UnitAdmin
 
             // Required for the SyncFusion File Upload control to function
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
@@ -85,11 +86,13 @@ namespace UnitAdmin
 
             #endregion
 
-           
+            services.AddScoped<SecurityService>();
 
             // Add fake Email sender for Identity
             // TODO: Replace mock email sender with real implementation
             services.AddSingleton<IEmailSender , MockEmailSender>();
+            services.AddScoped<IUserTwoFactorTokenProvider<AppUser> , MockTwoFactorAuthTokenProvider>();
+            services.AddScoped<IUserService , UserService>();
 
             services.AddScoped<IActivityService , ActivityService>();
             services.AddScoped<IAnnouncementService , AnnouncementService>();
@@ -116,6 +119,11 @@ namespace UnitAdmin
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

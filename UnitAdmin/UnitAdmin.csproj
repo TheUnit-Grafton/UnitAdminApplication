@@ -6,6 +6,15 @@
   </PropertyGroup>
 
     <ItemGroup>
+    <None Include="Areas\Identity\Pages\Account\LogOut.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\SignIn.razor" />
+    <None Include="Areas\Identity\Pages\Account\SignOut.razor" />
+    <None Include="Areas\Identity\Pages\Account\SignUp.razor" />
+    <None Include="Areas\Identity\Pages\Account\SignUpEmailConfirmed.razor" />
+    <None Include="Areas\Identity\Pages\Error.cshtml" />
+    <None Include="Areas\Identity\Pages\Shared\UserControl.razor" />
+    <None Include="Areas\Identity\Pages\Shared\_LoginPartial.cshtml" />
+    <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
     <None Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
     <None Include="wwwroot\css\open-iconic\FONT-LICENSE" />
     <None Include="wwwroot\css\open-iconic\font\fonts\open-iconic.svg" />
@@ -29,10 +38,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataLibrary\DataLibrary.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Identity\Pages\Account\Manage\" />
   </ItemGroup>
 
 </Project>

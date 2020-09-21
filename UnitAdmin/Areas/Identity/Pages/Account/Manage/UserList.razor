@@ -1,0 +1,42 @@
+﻿@page "/admin/manage/users"
+
+@using UnitAdmin.Models
+
+ 
+
+<h3 class="lab-header">The UnIT User Manager</h3>
+<p>Double-Click on a row to Edit that User's record.</p>
+
+<SfGrid DataSource="@users" AllowPaging="true" AllowSorting="true" Height="550">
+    <GridPageSettings PageSize="15"></GridPageSettings>
+    <GridEvents OnRecordDoubleClick="EditUser" TValue="AppUser"></GridEvents>
+    <GridColumns>
+        <GridColumn Field=@nameof(AppUser.UserName)
+                    HeaderText="Username"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(AppUser.FirstName)
+                    HeaderText="First Name"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(AppUser.LastName)
+                    HeaderText="Last Name"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(AppUser.PhoneNumber)
+                    HeaderText="Phone Number"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(AppUser.Email)
+                    HeaderText="Email Address"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+        <GridColumn Field=@nameof(AppUser.Position)
+                    HeaderText="Position"
+                    TextAlign="TextAlign.Left">
+        </GridColumn>
+    </GridColumns>
+</SfGrid>
+<div class="m-3">
+    <button class="btn btn-primary" @onclick="AddUser">New User</button>
+</div>
