@@ -59,7 +59,8 @@ namespace UnitAdmin
              })
                 .AddUserManager<UserManager<AppUser>>()
                 .AddRoles<AppRole>()
-                .AddEntityFrameworkStores<AuthDbContext>();
+                .AddEntityFrameworkStores<AuthDbContext>()
+                .AddDefaultTokenProviders();
 
             // Required for the SyncFusion File Upload control to function
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
