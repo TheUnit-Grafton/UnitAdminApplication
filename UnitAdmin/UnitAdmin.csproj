@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-UnitAdmin-C3F59A95-FD39-43F9-AA2F-9E1EA9E4856B</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20200923023803_AddUserPositionField.cs" />
+    <Compile Remove="Migrations\20200923023803_AddUserPositionField.Designer.cs" />
+  </ItemGroup>
+
     <ItemGroup>
     <None Include="Areas\Identity\Pages\Account\LogOut.cshtml" />
     <None Include="Areas\Identity\Pages\Account\SignIn.razor" />
