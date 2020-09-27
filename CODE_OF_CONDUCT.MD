@@ -2,11 +2,11 @@
 
 ## 1. Purpose
 
-A primary goal of TheLab is to be inclusive to the largest number of contributors, with the most varied and diverse backgrounds possible. As such, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, ability, ethnicity, socioeconomic status, and religion (or lack thereof).
+A primary goal of The UnIT is to be inclusive to the largest number of contributors, with the most varied and diverse backgrounds possible. As such, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, ability, ethnicity, socioeconomic status, and religion (or lack thereof).
 
 This code of conduct outlines our expectations for all those who participate in our community, as well as the consequences for unacceptable behavior.
 
-We invite all those who participate in TheLab to help us create safe and positive experiences for everyone.
+We invite all those who participate in The UnIT to help us create safe and positive experiences for everyone.
 
 ## 2. Open [Source/Culture/Tech] Citizenship
 
@@ -45,7 +45,7 @@ The following behaviors are considered harassment and are unacceptable within ou
 
 ## 5. Games Policy
 
-TheLab caters for members as young as 8 years old. We recognise that some popular FPS (First Person Shooter) video games may contain material inappropriate for people this young to be exposed to.  For this reason, TheLab does NOT allow violent "shooter" style video games, or any game with a rating higher than PG under the Australian rating system.
+The UnIT caters for members as young as 8 years old. We recognise that some popular FPS (First Person Shooter) video games may contain material inappropriate for people this young to be exposed to.  For this reason, The UnIT does NOT allow violent "shooter" style video games, or any game with a rating higher than PG under the Australian rating system.
 
 ## 6. Consequences of Unacceptable Behavior
 
@@ -76,7 +76,7 @@ This code of conduct and its related procedures also applies to unacceptable beh
 
 ## 10. Contact info
 
-[TheLab Grafton](mailto:grafton@thelab.org.au)
+[The UnIT Grafton](mailto:info@theunit.club)
 
 [Manager of this repository](mailto:sgteece@hotmail.com)
 
