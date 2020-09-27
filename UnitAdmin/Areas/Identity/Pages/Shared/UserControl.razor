@@ -132,15 +132,8 @@
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback ValidSubmit { get; set; }
     [Parameter] public EventCallback OnCancelClick { get; set; }
+    [Parameter] public AppUser Model { get; set; }
     [Parameter] public string[] AvailableRoles { get; set; }
 
-
-
-    [Parameter] public AppUser Model { get; set; }
-
     private string[] Items = new string[] { "moveTo" , "moveFrom" , "moveAllTo" , "moveAllFrom" };
-
-    //SfListBox<string[] , AppRole> CurrentRoles;
-
-
 }

@@ -22,6 +22,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
         protected override async Task OnParametersSetAsync()
         {
             userModel = await _riasp.FindByIdAsync(id);
+
         }
 
         public async Task UpdateUser()
