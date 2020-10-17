@@ -6,7 +6,7 @@ namespace UnitAdmin.Pages.Parts
 {
     public partial class EditPart : ComponentBase
     {
-        private PartModel partToEdit;
+        private PartModel partToEdit = new PartModel();
 
         protected override async Task OnParametersSetAsync()
         {
