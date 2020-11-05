@@ -40,3 +40,8 @@
 <div class="m-3">
     <button class="btn btn-primary" @onclick="AddUser">New User</button>
 </div>
+
+@code{
+        [CascadingParameter] public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+
+}
