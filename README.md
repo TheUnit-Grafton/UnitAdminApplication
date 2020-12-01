@@ -1,4 +1,3 @@
-# <strong>This branch has been archived. No further pull requests to this branch will be accepted.</strong>
 
 ![The Unit Clarence Valley](Images/TheUnitLogo.jpg)
 
