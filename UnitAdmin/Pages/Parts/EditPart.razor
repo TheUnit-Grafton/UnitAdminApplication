@@ -1,6 +1,8 @@
 ﻿@page "/parts/{id:int}"
 @inject IPartsService parts
 @inject NavigationManager navMan
+
+
   
 <h3 class="lab-header-italic">Edit Part</h3>
 
@@ -10,4 +12,28 @@
 
 @code {
     [Parameter] public int id { get; set; }
+
+    private PartModel partToEdit = new PartModel();
+
+        protected override async Task OnParametersSetAsync()
+        {
+            partToEdit = await parts.GetPartByIdAsync(id);
+        }
+
+        private async Task UpdateRecord()
+        {
+            await parts.UpdatePartAsync(partToEdit);
+            navMan.NavigateTo("/parts");
+        }
+
+        private void CancelUpdate()
+        {
+            navMan.NavigateTo("/parts");
+        }
+
+        private void DeleteRecord()
+        {
+            parts.DeletePart(partToEdit);
+            navMan.NavigateTo("/parts");
+}
 }
