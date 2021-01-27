@@ -8,7 +8,7 @@ namespace UnitAdmin.Areas.Identity.Pages.Account.Manage
 {
     public partial class EditUser : ComponentBase
     {
-        [CascadingParameter] public Task<AuthenticationState> AuthenticationStateTask { get; set; }
+        //[CascadingParameter] public Task<AuthenticationState> AuthenticationStateTask { get; set; }
 
         [Parameter] public string id { get; set; }
 
