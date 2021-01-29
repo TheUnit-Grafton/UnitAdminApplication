@@ -1,0 +1,12 @@
+﻿@page "/admin/manage/user/add"
+
+@using UnitAdmin.Areas.Identity.Pages.Shared
+
+
+<h3 class="lab-header-italic">Edit User </h3>
+@if (newUser != null)
+{
+    <div>
+        <UserControl Model="@newUser" ButtonText="Add User" ValidSubmit="@CreateUser" OnCancelClick="@CancelClicked"></UserControl>
+    </div>
+}
