@@ -1,0 +1,37 @@
+﻿@using Syncfusion.Blazor.DropDowns
+
+<div id="listbox-control">
+    <div class="dual-list-wrapper">
+        <div class="dual-list-groupa">
+            <h4> Current Roles</h4>
+            <SfListBox Scope="#availableRoles2" DataSource="@Model.RoleNames" TItem="string" Height="330px" TValue="string[]">
+                <ListBoxToolbarSettings Items="@Items"></ListBoxToolbarSettings>
+            </SfListBox>
+        </div>
+        <div class="dual-list-groupb">
+            <h4>Available Roles</h4>
+            <SfListBox DataSource="@AvailableRoles" Height="330px" TItem="string" TValue="string[]">
+                <ListBoxFieldSettings Text="Name"></ListBoxFieldSettings>
+            </SfListBox>
+        </div>
+    </div>
+</div>
+
+@code{
+    [Parameter] public AppUser Model { get; set; }
+    [Parameter] public ICollection<string> AvailableRoles { get; set; }
+
+    private string[] Items = new string[] { "moveTo", "moveFrom", "moveAllTo", "moveAllFrom" };
+
+    protected override Task OnParametersSetAsync()
+    {
+        foreach (var item in Model.RoleNames)
+
+        {
+            if (AvailableRoles.Contains(item))
+            {
+                
+            }
+        }
+    }
+}

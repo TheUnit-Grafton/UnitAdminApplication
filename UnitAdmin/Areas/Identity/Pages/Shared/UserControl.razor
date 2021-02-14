@@ -39,7 +39,7 @@
         </div>
     </div>
     <div >
-        <div id="listbox-control">
+        @*<div id="listbox-control">
             <div class="dual-list-wrapper">
                 <div class="dual-list-groupa">
                     <h4> Current Roles</h4>
@@ -54,7 +54,8 @@
                     </SfListBox>
                 </div>
             </div>
-        </div>
+        </div>*@
+        <DualListControl Model="@Model" AvailableRoles="@AvailableRoles" />
     </div>
     <div class="row col-12">
         <button type="submit" class="btn btn-success m-3">@ButtonText</button>
